@@ -14,6 +14,7 @@ configuration_nginx()
     [ -f "${etc_dir}/fcgi.conf" ] && cp -f "${etc_dir}/fcgi.conf" "${install_dir_prefix}/${module}-${version}/conf/fcgi.conf"
     [ -f "${etc_dir}/log_format.conf" ] && cp -f "${etc_dir}/log_format.conf" "${install_dir_prefix}/${module}-${version}/conf/log_format.conf"
     [ -f "${etc_dir}/upstream.conf" ] && cp -f "${etc_dir}/upstream.conf" "${install_dir_prefix}/${module}-${version}/conf/upstream.conf"
+    [ -f "${etc_dir}/map.conf" ] && cp -f "${etc_dir}/map.conf" "${install_dir_prefix}/${module}-${version}/conf/map.conf"
     [ -f "${etc_dir}/nginx-${version%.*}.conf" ] && cp -f "${etc_dir}/nginx-${version%.*}.conf" "${install_dir_prefix}/${module}-${version}/conf/nginx.conf"
     [ -f "${etc_dir}/sites-available/127.0.0.1.conf" ] && cp -f "${etc_dir}/sites-available/127.0.0.1.conf" "${install_dir_prefix}/${module}-${version}/conf/sites-available/127.0.0.1.conf"
 }
