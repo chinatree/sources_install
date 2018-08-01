@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# Compile libs of e2fsprogs function
+compile_libs_e2fsprogs()
+{
+    clean_tmp
+
+    local module="gearmand"
+    local version="${libs_e2fsprogs_version}"
+    local logfile=""${install_log_dir}"/"${module}".log"
+    cp -a "${libs_dir}"/"${module}"-"${version}".tar.gz "${tmp_dir}"
+    cd "${tmp_dir}"
+
+    tar xf "${module}"-"${version}".tar.gz
+    cd "${module}"-"${version}"
+    echo -n "Compile `get_color "${module}"-"${version}" CYANBLUE` to `get_color "${install_dir_prefix}" UNDERLINE` ... "
+    ./configure --prefix="${install_dir_prefix}"/"${module}"-"${version}" --with-memcached="${install_dir_prefix}"/memcached-"${memcached_version}" > "${logfile}" 2>&1
+    cd lib/uuid
+    sed -i 's/^CFLAGS = -g -O2$/CFLAGS = -g -O2 -fPIC/' Makefile
+    make >> "${logfile}" 2>&1
+    make install >> "${logfile}" 2>&1
+    get_exit_code $? 1
+
+    clean_tmp
+}

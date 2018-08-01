@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Configuration services of hbase function
+configuration_hbase()
+{
+    local module="hbase"
+    local version="${apache_hbase_version}"
+    local logfile="${install_log_dir}/${module}.log"
+    local account="hadoop"
+
+    [ ! -h "${install_dir_prefix}/${module}" ] && cd "${install_dir_prefix}" && ln -sf "${module}-${version}" "${module}"
+
+    chk_not_exists_user "${account}"
+    if [ $? -eq 1 ];
+    then
+        groupadd -r "${account}" 
+        useradd -r -s /sbin/nologin -g "${account}" "${account}"
+    fi
+    chown -R "${account}"."${account}" "${install_dir_prefix}/${module}-${version}"
+}

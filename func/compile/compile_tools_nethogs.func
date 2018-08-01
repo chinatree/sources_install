@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# Compile tools of nethogs function
+compile_tools_nethogs()
+{
+    local config_action=${1:-None}
+    clean_tmp
+
+    local module="nethogs"
+    local version="${tools_nethogs_version}"
+    local packet_file="${tools_dir}/${module}-${version}.tar.gz"
+    local logfile="${install_log_dir}/${module}.log"
+    if [ ! -f "${packet_file}" ];
+    then
+        echo -n "The file `get_color "${packet_file}" UNDERLINE` not exists ... "
+        get_exit_code 1 0
+        return
+    fi
+    cp -a "${packet_file}" "${tmp_dir}"
+    cd "${tmp_dir}"
+
+    tar xf "${packet_file}"
+    cd "${module}"
+    echo -n "Compile `get_color "${module}-${version}" CYANBLUE` to `get_color "${install_tools_prefix}" UNDERLINE` ... "
+    sed -i 's#/usr/local#'"${install_tools_prefix}/${module}-${version}"'#' Makefile
+    sed -i 's#CFLAGS=-g -Wall -Wextra#CFLAGS=-g -Wall -Wextra '"-I ${install_libs_dir_prefix}/libpcap-${libs_libpcap_version}/include -L ${install_libs_dir_prefix}/libpcap-${libs_libpcap_version}/lib"'#' Makefile
+    make > "${logfile}" 2>&1
+    make install >> "${logfile}" 2>&1
+    get_exit_code $? 1
+
+    # configuration
+    if [ "${config_action}" = "auto_config" ];
+    then
+        "${AUTO_CONFIG_SH}" -t "tools_${module}"
+    fi
+
+    clean_tmp
+}

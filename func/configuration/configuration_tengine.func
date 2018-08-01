@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Configuration services of tengine function
+configuration_tengine()
+{
+    local module="tengine"
+    local version="${tengine_version}"
+
+    [ ! -h "${install_dir_prefix}/${module}" ] && cd "${install_dir_prefix}" && ln -sf "${module}"-"${version}" "${module}"
+    cd "${install_dir_prefix}"/"${module}"-"${version}"/conf/
+    mkdir -p sites-available sites-enabled
+    rm -f fastcgi.conf.default fastcgi_params.default mime.types.default tengine.conf.default scgi_params.default uwsgi_params.default nginx.conf.default
+    [ -f "${etc_dir}"/fcgi.conf ] && cp -f "${etc_dir}"/fcgi.conf "${install_dir_prefix}"/"${module}"-"${version}"/conf/fcgi.conf
+    [ -f "${etc_dir}"/tengine-"${version%.*}".conf ] && cp -f "${etc_dir}"/tengine-"${version%.*}".conf "${install_dir_prefix}"/"${module}"-"${version}"/conf/tengine.conf
+    [ -f "${etc_dir}"/sites-available/127.0.0.1.conf ] && cp -f "${etc_dir}"/sites-available/127.0.0.1.conf "${install_dir_prefix}"/"${module}"-"${version}"/conf/sites-available/127.0.0.1.conf
+}

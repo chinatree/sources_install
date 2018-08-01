@@ -1,0 +1,12 @@
+# Directories
+/logs
+/tmp
+/packets/*
+
+# Files
+.DS_Store
+
+# Editor swap files
+*.swp
+*.swo
+*.swn

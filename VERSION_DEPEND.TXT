@@ -1,0 +1,48 @@
+
+
+
+
+
+[PHP]
+taint-1.2.2 < php-5.4.x
+yaf-2.2.9 < php-5.6.x
+
+
+xcache-3.2.0 > php-5.6.x
+ImageMagick-6.9.0-0 > php-5.6.4
+
+
+
+
+
+[LVS]
+libnl-devel
+popt-devel
+popt-static
+
+
+
+[Python Extensions]
+M2Crypto in CentOS/RedHat, need do some sed operation
+M2Crypto must specified pcre lib folder
+M2crypto require swig <= 3.0.4
+Active-SQLAlchemy 0.4.0 require SQLAlchemy = 0.9.8
+
+salt            2015.5.x        
+salt            2015.8.x        Tornado, timelib, smmap, pygit2, python-gnupg, pycparser, dateutil
+
+
+
+tornado         4.2.1           certifi, backports.ssl-match-hostname
+tornado         4.3             backports_abc, singledispatch, six, certifi, backports.ssl-match-hostname
+
+Moko            1.0.3           MarkupSafe
+python-dateutil 2.4.2           six
+dateutils       0.6.64          pytz, python-dateutil, argparse, six
+
+[middleware]
+twemproxy: autoconf > 2.64
+
+
+[other]
+mesos 0.25.0    gcc >= 4.8

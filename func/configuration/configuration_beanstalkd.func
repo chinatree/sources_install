@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Configuration services beanstalkd function
+configuration_beanstalkd()
+{
+    local module="beanstalkd"
+    local version="${beanstalkd_version}"
+
+    [ ! -h "${install_dir_prefix}/${module}" ] && cd "${install_dir_prefix}" && ln -sf "${module}-${version}" "${module}"
+    ln -sf "${install_dir_prefix}/${module}/bin/beanstalkd" "/usr/local/bin/beanstalkd"
+}

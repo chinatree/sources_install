@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# Compile services mongodb function
+compile_mongodb()
+{
+    local config_action=${1:-None}
+    clean_tmp
+
+    local module="mongodb"
+    local version="${mongodb_version}"
+    local packet_file="${packets_dir}/${module}-${version}.tgz"
+    local logfile="${install_log_dir}/${module}.log"
+    if [ ! -f "${packet_file}" ];
+    then
+        echo -n "The file `get_color "${packet_file}" UNDERLINE` not exists ... "
+        get_exit_code 1 0
+        return
+    fi
+    cp -a "${packet_file}" "${tmp_dir}"
+    cd "${tmp_dir}"
+
+    tar xf "${packet_file}"
+    echo -n "Compile `get_color "${module}"-"${version}" CYANBLUE` to `get_color "${install_dir_prefix}" UNDERLINE` ... "
+    mv "${module}-${version}" "${install_dir_prefix}/${module}-${version}"
+    get_exit_code $? 1
+
+    # configuration
+    if [ "${config_action}" = "auto_config" ];
+    then
+        "${AUTO_CONFIG_SH}" -t "${module}"
+    fi
+
+    clean_tmp
+}

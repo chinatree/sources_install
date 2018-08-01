@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# Compile python ext of pyzmq function
+compile_python_ext_pyzmq()
+{
+    local action=${1:-None}
+    # compile depend service
+    if [ "${action}" = "auto" ];
+    then
+        compile_zeromq 'auto_config'
+    elif [ "${action}" = "interact" ];
+    then
+        interact_choice "install zeromq?" 'compile_zeromq auto_config'
+    fi
+
+    clean_tmp
+
+    local module="pyzmq"
+    local version="${python_ext_pyzmq_version}"
+    local packet_file="${python_exts_dir}/${module}-${version}.tar.gz"
+    local logfile="${install_log_dir}/python_ext_${module}.log"
+    if [ ! -f "${packet_file}" ];
+    then
+        echo -n "The file `get_color "${packet_file}" UNDERLINE` not exists ... "
+        get_exit_code 1 0
+        return
+    fi
+    cp -a "${packet_file}" "${tmp_dir}"
+    cd "${tmp_dir}"
+
+    tar xf "${packet_file}"
+    cd "${module}-${version}"
+    echo -n "Compile `get_color "${module}"-"${version}" CYANBLUE` for python extension ... "
+    ${install_dir_prefix}/Python/bin/python setup.py install --zmq="${install_dir_prefix}/zeromq-${zeromq_version}" >> "${logfile}" 2>&1
+    get_exit_code $? 0
+
+    clean_tmp
+}

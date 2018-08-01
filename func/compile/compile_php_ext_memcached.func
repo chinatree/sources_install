@@ -1,0 +1,40 @@
+#!/bin/bash
+
+# Compile php ext of memcached function
+compile_php_ext_memcached()
+{
+    local action=${1:-None}
+    # compile depend lib
+    if [ "${action}" = "auto" ]
+    then
+        compile_libs_libmemcached
+    elif [ "${action}" = "interact" ]
+    then
+        interact_choice "install libmemcached for memcached(php_ext)?" compile_libs_libmemcached
+    fi
+
+    clean_tmp
+
+    local module="memcached"
+    local version="${php_ext_memcached_version}"
+    local logfile=""${install_log_dir}"/php_ext_"${module}".log"
+    if [ ! -f "${php_exts_dir}/${module}-${version}.tgz" ];
+    then
+        echo -n "The file `get_color "${php_exts_dir}/${module}-${version}.tgz" UNDERLINE` not exists ... "
+        get_exit_code 1 0
+        return
+    fi
+    cp -a "${php_exts_dir}"/"${module}"-"${version}".tgz "${tmp_dir}"
+    cd "${tmp_dir}"
+
+    tar xf "${module}"-"${version}".tgz
+    cd "${module}"-"${version}"
+    echo -n "Compile `get_color "${module}"-"${version}" CYANBLUE` for php extension ... "
+    ${install_dir_prefix}/php/bin/phpize > "${logfile}" 2>&1
+    ./configure --prefix="${install_dir_prefix}"/"${module}"-"${version}" --enable-memcached-igbinary --with-libmemcached-dir="${install_libs_dir_prefix}"/libmemcached-"${libs_libmemcached_version}" --disable-memcached-sasl >> "${logfile}" 2>&1    
+    make >> "${logfile}" 2>&1
+    make install >> "${logfile}" 2>&1
+    get_exit_code $? 0
+
+    clean_tmp
+}

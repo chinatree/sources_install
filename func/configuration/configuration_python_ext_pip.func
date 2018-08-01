@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Configuration python ext of function
+configuration_python_ext_pip()
+{
+    local module="Python"
+    local version="${python_ext_pip_version}"
+
+    ln -sf "${install_dir_prefix}/${module}/bin/pip" "${path_local_bin}"
+}

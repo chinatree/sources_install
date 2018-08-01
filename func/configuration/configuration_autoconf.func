@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Configuration services autoconf function
+configuration_autoconf()
+{
+    local module="autoconf"
+    local version="${autoconf_version}"
+
+    [ ! -h "${install_dir_prefix}/${module}" ] && cd "${install_dir_prefix}" && ln -sf "${module}-${version}" "${module}"
+    ln -sf "${install_dir_prefix}/${module}/bin/autoconf" "${path_local_bin}/autoconf"
+    ln -sf "${install_dir_prefix}/${module}/bin/autoheader" "${path_local_bin}/autoheader"
+}

@@ -1,0 +1,45 @@
+#!/bin/bash
+
+# Compile services of mysql function
+compile_mysql()
+{
+    local config_action="${1:-None}"
+    clean_tmp
+
+    local module="mysql"
+    local version="${mysql_version}"
+    local packet_file="${packets_dir}/${module}-${version}.tar.gz"
+    local logfile="${install_log_dir}/${module}.log"
+    if [ ! -f "${packet_file}" ];
+    then
+        echo -n "The file `get_color "${packet_file}" UNDERLINE` not exists ... "
+        get_exit_code 1 0
+        return
+    fi
+    cp -a "${packet_file}" "${tmp_dir}"
+    cd "${tmp_dir}"
+
+    tar xf "${packet_file}"
+    cd "${module}-${version}"
+    echo -n "Compile `get_color "${module}"-"${version}" CYANBLUE` to `get_color "${install_dir_prefix}" UNDERLINE` ... "
+    if [ "${version%.*}" == '5.1' ];
+    then
+        ./configure --prefix="${install_dir_prefix}/${module}-${version}" --enable-assembler --with-mysqld-ldflags=-all-static --with-client-ldflags="-all-static -ltinfo" --without-debug --enable-thread-safe-client --with-big-tables --enable-local-infile --enable-shared --with-charset=utf8 --with-extra-charsets=gbk,gb2312,big5,latin1 --with-plugins=innobase,myisam,ndbcluster,csv,partition > "${logfile}" 2>&1
+    elif [ "${version%.*}" == '5.5' ] || [ "${version%.*}" == '5.6' ] || [ "${version%.*}" == '5.7' ];
+    then
+        cmake -DCMAKE_INSTALL_PREFIX="${install_dir_prefix}/${module}-${version}" -DDEFAULT_CHARSET=utf8 -DDEFAULT_COLLATION=utf8_general_ci -DEXTRA_CHARSETS=all -DWITH_DEBUG=0 -DENABLED_LOCAL_INFILE=1 -DWITH_INNOBASE_STORAGE_ENGINE=1 -DWITH_PARTITION_STORAGE_ENGINE=1 > "${logfile}" 2>&1
+    fi
+    make >> "${logfile}" 2>&1
+    make install >> "${logfile}" 2>&1
+    get_exit_code $? 1
+
+    cp -a support-files/mysql.server "${install_dir_prefix}"/"${module}"-"${version}"
+
+    # configuration
+    if [ "${config_action}" = "auto_config" ];
+    then
+        "${AUTO_CONFIG_SH}" -t "${module}"
+    fi
+
+    clean_tmp
+}

@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# Configuration services of hadoop function
+configuration_hadoop()
+{
+    local module="hadoop"
+    local version="${hadoop_version}"
+    local logfile="${install_log_dir}/${module}.log"
+    local account="hadoop"
+    local profile_file="/etc/profile"
+
+    [ ! -h "${install_dir_prefix}/${module}" ] && cd "${install_dir_prefix}" && ln -sf "${module}-${version}" "${module}"
+
+    chk_not_exists_user "${account}"
+    if [ $? -eq 1 ];
+    then
+        groupadd "${account}" 
+        useradd -c "Hadoop User" -s /bin/bash -g "${account}" -m "${module}"
+    fi
+    chown -R "${account}"."${account}" "${install_dir_prefix}/${module}-${version}"
+
+    local added_flag=$(less "${profile_file}" | grep '# Set Hadoop Environment Variable' | wc -l)
+    if test "${added_flag}" -eq 0
+    then
+        cat <<EOF >> "${profile_file}"
+
+# Set Hadoop Environment Variable
+export HADOOP_HOME="${install_dir_prefix}/${module}"
+export PATH=\$PATH:\$HADOOP_HOME/bin
+EOF
+    fi
+    
+    source "${profile_file}"
+}

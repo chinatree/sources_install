@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Configuration library libxml2 function
+# For FastDHT
+configuration_libs_db()
+{
+    local config_action="${1:-None}"
+    local module="db"
+    local version="${libs_db_version}"
+
+    [ ! -h "${install_libs_dir_prefix}/${module}" ] && cd "${install_libs_dir_prefix}" && ln -sf "${module}"-"${version}" "${module}"
+    echo "${install_libs_dir_prefix}/${module}/lib/" > /etc/ld.so.conf.d/"${module}".conf
+    ldconfig
+
+    # configuration
+    if [ "${config_action}" = "auto_config" ];
+    then
+        "${AUTO_CONFIG_SH}" -t libs_"${module}"
+    fi
+}

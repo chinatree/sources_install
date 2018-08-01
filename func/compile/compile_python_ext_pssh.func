@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Compile python ext of pssh function
+compile_python_ext_pssh()
+{
+    clean_tmp
+
+    local module="pssh"
+    local version="${python_ext_pssh_version}"
+    local logfile=""${install_log_dir}"/python_ext_"${module}".log"
+    cp -a "${python_exts_dir}"/"${module}"-"${version}".tar.gz "${tmp_dir}"
+    cd "${tmp_dir}"
+
+    tar xf "${module}"-"${version}".tar.gz
+    cd "${module}"-"${version}"
+    echo -n "Compile `get_color "${module}"-"${version}" CYANBLUE` for python extension ... "
+    ${install_dir_prefix}/Python/bin/python setup.py install >> "${logfile}" 2>&1
+    get_exit_code $? 0
+
+    clean_tmp
+}

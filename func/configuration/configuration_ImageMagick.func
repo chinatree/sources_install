@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Configuration services ImageMagick function
+configuration_ImageMagick()
+{
+    local module="ImageMagick"
+    local version="${ImageMagick_version}"
+
+    [ ! -h "${install_dir_prefix}/${module}" ] && cd "${install_dir_prefix}" && ln -sf "${module}"-"${version}" "${module}"
+}

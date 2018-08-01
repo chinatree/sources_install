@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# Compile php ext of scws function
+compile_php_ext_scws()
+{
+    local action=${1:-None}
+    # compile depend program
+    if [ "${action}" = "auto" ];
+    then
+        compile_scws 'auto_config'
+    elif [ "${action}" = "interact" ]
+    then
+        interact_choice "install scws for scws(php_ext)?" 'compile_scws auto_config'
+    fi
+
+    clean_tmp
+
+    local module="scws"
+    local version="${php_ext_scws_version}"
+    local logfile=""${install_log_dir}"/php_ext_"${module}".log"
+    cp -a "${packets_dir}"/"${module}"-"${version}".tar.bz2 "${tmp_dir}"
+    cd "${tmp_dir}"
+
+    tar xf "${module}"-"${version}".tar.bz2
+    cd "${module}"-"${version}"/phpext
+    echo -n "Compile `get_color "${module}"-"${version}" CYANBLUE` for php extension ... "
+    ${install_dir_prefix}/php/bin/phpize > "${logfile}" 2>&1
+    ./configure --prefix="${install_dir_prefix}"/"${module}"-"${version}" --with-scws="${install_dir_prefix}"/"${module}"-"${scws_version}" > "${logfile}" 2>&1
+    make >> "${logfile}" 2>&1
+    make install >> "${logfile}" 2>&1
+    get_exit_code $? 0
+
+    clean_tmp
+}

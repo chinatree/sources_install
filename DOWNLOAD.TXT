@@ -1,0 +1,211 @@
+/**
+ * Servers
+ */
+wget http://nginx.org/download/nginx-1.10.3.tar.gz
+wget ftp://gd.tuwien.ac.at/db/mysql/Downloads/MySQL-5.5/mysql-5.5.41.tar.gz
+wget http://mirrors.ustc.edu.cn/mariadb/mariadb-5.5.41/source/mariadb-5.5.41.tar.gz
+wget http://cn2.php.net/distributions/php-7.1.3.tar.gz
+wget http://www.memcached.org/files/memcached-1.4.24.tar.gz
+wget https://nodejs.org/dist/v6.10.0/node-v6.10.0.tar.gz
+wget http://www.imagemagick.org/download/ImageMagick-6.9.0-0.tar.bz2
+wget http://download.redis.io/releases/redis-2.8.9.tar.gz
+wget http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-2.6.1.tgz
+wget ftp://ftp.ossp.org/pkg/lib/uuid/uuid-1.6.2.tar.gz
+wget http://www.xunsearch.com/scws/down/scws-1.2.2.tar.bz2
+wget http://download.lighttpd.net/lighttpd/releases-1.4.x/lighttpd-1.4.35.tar.gz
+wget http://www.linuxvirtualserver.org/software/kernel-2.6/ipvsadm-1.26.tar.gz
+wget http://www.keepalived.org/software/keepalived-1.2.13.tar.gz
+wget http://apache.fayea.com/apache-mirror/tomcat/tomcat-8/v8.0.9/bin/apache-tomcat-8.0.9.tar.gz
+wget http://apache.fayea.com/apache-mirror/httpd/httpd-2.4.9.tar.gz
+wget http://jaist.dl.sourceforge.net/project/swig/swig/swig-3.0.5/swig-3.0.5.tar.gz
+wget http://www.rabbitmq.com/releases/rabbitmq-server/v3.3.4/rabbitmq-server-3.3.4.tar.gz
+wget https://repo.varnish-cache.org/source/varnish-4.0.1.tar.gz
+wget http://mirror.bit.edu.cn/apache/hadoop/common/hadoop-2.4.1/hadoop-2.4.1.tar.gz
+wget https://www.python.org/ftp/python/2.7.9/Python-2.7.9.tgz
+wget https://github.com/kr/beanstalkd/archive/v1.10.tar.gz
+
+/**
+ * Libraries
+ */
+wget http://mirrors.hust.edu.cn/apache/apr/apr-1.5.1.tar.bz2
+wget http://mirrors.hust.edu.cn/apache/apr/apr-util-1.5.3.tar.bz2
+wget http://www.bzip.org/1.0.6/bzip2-1.0.6.tar.gz
+wget http://curl.haxx.se/download/curl-7.36.0.tar.gz
+wget http://jaist.dl.sourceforge.net/project/e2fsprogs/e2fsprogs/v1.42.9/e2fsprogs-1.42.9.tar.gz
+wget https://github.com/downloads/libevent/libevent/libevent-2.0.21-stable.tar.gz
+wget ftp://ftp.gnu.org/gnu/gsasl/libgsasl-1.8.0.tar.gz
+wget http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.14.tar.gz
+wget http://jaist.dl.sourceforge.net/project/libpng/libpng16/1.6.10/libpng-1.6.10.tar.gz
+wget ftp://xmlsoft.org/libxml2/libxml2-2.9.1.tar.gz
+wget https://ftp.pcre.org/pub/pcre/pcre-8.40.tar.bz2
+wget http://www.tcpdump.org/release/libpcap-1.6.2.tar.gz
+wget https://github.com/jedisct1/libsodium/releases/download/1.0.3/libsodium-1.0.3.tar.gz
+wget https://github.com/atgreen/libffi/archive/v3.2.1.tar.gz
+
+/**
+ * PHP Exts
+ */
+wget http://pecl.php.net/get/APC-3.1.13.tgz
+wget http://pecl.php.net/get/gearman-1.1.2.tgz
+wget http://pecl.php.net/get/igbinary-1.1.1.tgz
+wget http://pecl.php.net/get/imagick-3.1.2.tgz
+wget http://pecl.php.net/get/intl-3.0.0.tgz
+wget http://pecl.php.net/get/lua-1.0.0.tgz
+wget http://pecl.php.net/get/memcache-2.2.7.tgz
+wget http://pecl.php.net/get/memcached-2.2.0.tgz
+wget http://pecl.php.net/get/mongo-1.5.2.tgz
+wget http://pecl.php.net/get/redis-2.2.5.tgz
+wget http://pecl.php.net/get/taint-1.2.2.tgz
+wget http://pecl.php.net/get/uuid-1.0.3.tgz
+wget http://xcache.lighttpd.net/pub/Releases/3.1.0/xcache-3.1.0.tar.gz
+wget http://pecl.php.net/get/xdebug-2.2.5.tgz
+wget http://pecl.php.net/get/yaf-2.2.9.tgz
+
+/**
+ * Python Exts
+ **/
+wget https://pypi.python.org/packages/source/s/setuptools/setuptools-15.1.tar.gz
+wget https://pypi.python.org/packages/source/p/pip/pip-1.5.6.tar.gz
+wget https://www.djangoproject.com/m/releases/1.6/Django-1.6.4.tar.gz
+wget https://pypi.python.org/packages/source/M/MySQL-python/MySQL-python-1.2.5.zip
+wget https://pypi.python.org/packages/source/p/pssh/pssh-2.3.1.tar.gz
+wget https://pypi.python.org/packages/source/p/protobuf/protobuf-2.5.0.tar.gz
+wget https://pypi.python.org/packages/source/p/pymongo/pymongo-2.7.tar.gz
+wget https://pypi.python.org/packages/source/r/readline/readline-6.2.4.1.tar.gz
+wget https://pypi.python.org/packages/source/r/redis/redis-2.9.1.tar.gz
+wget https://pypi.python.org/packages/source/b/bz2file/bz2file-0.98.tar.gz
+wget https://pypi.python.org/packages/source/P/PyYAML/PyYAML-3.11.tar.gz
+wget https://pypi.python.org/packages/source/J/Jinja2/Jinja2-2.7.3.tar.gz
+wget https://pypi.python.org/packages/source/m/msgpack-python/msgpack-python-0.1.12.tar.gz
+wget https://pypi.python.org/packages/source/p/pycrypto/pycrypto-2.6.1.tar.gz
+wget https://pypi.python.org/packages/source/M/M2Crypto/M2Crypto-0.22.3.tar.gz
+wget https://pypi.python.org/packages/source/m/msgpack-pure/msgpack-pure-0.1.3.tar.gz
+wget https://pypi.python.org/packages/source/l/libnacl/libnacl-1.4.3.tar.gz
+wget https://pypi.python.org/packages/source/b/backports.ssl_match_hostname/backports.ssl_match_hostname-3.4.0.2.tar.gz
+wget https://pypi.python.org/packages/source/c/certifi/certifi-2015.04.28.tar.gz
+wget https://pypi.python.org/packages/source/t/tornado/tornado-4.2.1.tar.gz
+wget https://pypi.python.org/packages/source/M/Mako/Mako-0.5.0.tar.gz
+wget https://pypi.python.org/packages/source/i/ioflo/ioflo-1.3.8.tar.gz
+wget https://pypi.python.org/packages/source/s/six/six-1.9.0.tar.gz
+wget https://pypi.python.org/packages/source/e/enum34/enum34-1.0.4.tar.gz
+wget https://pypi.python.org/packages/source/r/raet/raet-0.6.3.tar.gz
+wget https://pypi.python.org/packages/source/s/salt/salt-2015.5.3.tar.gz
+wget https://pypi.python.org/packages/source/p/pyaml/pyaml-14.05.7.tar.gz
+wget https://pypi.python.org/packages/source/d/docutils/docutils-0.11.tar.gz
+wget https://pypi.python.org/packages/source/I/IPy/IPy-0.83.tar.gz
+wget https://pypi.python.org/packages/source/d/dnspython/dnspython-1.12.0.zip
+wget https://pypi.python.org/packages/source/X/XlsxWriter/XlsxWriter-0.7.2.tar.gz
+wget https://pypi.python.org/packages/source/s/scapy/scapy-2.3.1.zip
+wget https://pypi.python.org/packages/source/p/pyClamd/pyClamd-0.3.14.tar.gz
+wget https://pypi.python.org/packages/source/p/python-nmap/python-nmap-0.3.4.tar.gz
+wget https://pypi.python.org/packages/source/p/pexpect/pexpect-3.3.tar.gz
+wget https://pypi.python.org/packages/source/e/ecdsa/ecdsa-0.13.tar.gz
+wget https://pypi.python.org/packages/source/p/paramiko/paramiko-1.15.2.tar.gz
+wget https://pypi.python.org/packages/source/s/shadowsocks/shadowsocks-2.6.8.tar.gz
+wget https://pypi.python.org/packages/source/c/cryptography/cryptography-0.9.3.tar.gz
+wget https://pypi.python.org/packages/source/p/pyOpenSSL/pyOpenSSL-0.15.1.tar.gz
+wget https://pypi.python.org/packages/source/w/websocket-client/websocket_client-0.32.0.tar.gz
+wget https://pypi.python.org/packages/source/d/docker-py/docker-py-1.3.1.tar.gz
+wget https://pypi.python.org/packages/source/i/ipython/ipython-3.2.1.tar.gz
+wget https://pypi.python.org/packages/source/a/ansible/ansible-1.9.2.tar.gz
+wget https://pypi.python.org/packages/source/h/halite/halite-0.1.17.tar.gz
+
+/**
+ * Tools
+ */
+wget http://ncu.dl.sourceforge.net/project/nethogs/nethogs/0.8/nethogs-0.8.0.tar.gz
+
+
+/**
+ * Dependencies
+ **/
+
+#[Servers]
+# nginx:     libssl-dev
+# swig：     pcre
+# nodejs:    python, bzip2-devel
+#
+#[Python Extensions]
+# Ps.
+# (N)  ==  Not Python Extensions
+# (O)  ==  Optional
+#
+# pip:                   setuptools
+# salt:                  PyCrypto, PyYAML, jinja2, msgpack-python
+# Jinja2:                MarkupSafe
+# M2Crypto:              msgpack-python, swig(N)
+# pyClamd:               setuptools
+# paramiko:              ecdsa, pycrypto
+# tornado:               backports.ssl_match_hostname, certifi
+# pyzmq:                 zeromq(N)
+# libnacl:               libsodium(N)
+# Mako:                  MarkupSafe
+# raet:                  enum34, six, libnacl, ioflo
+# cffi:                  pycparser
+# pygit2:                cffi, pycparser
+# gitpython:             gitdb
+# py-dateutil:           six
+# salt:                  pciutils, dmidecode
+# smiley:                cliff(O), stevedore(O), stevedore(O), prettytable(O)
+#
+# bz2file:               bzip2-devel(N)
+# ansible:               pycrypto, setuptools, PyYAML, Jinja2, paramiko, MarkupSafe, ecdsa, sshpass
+# Flask:                 itsdangerous, Werkzeug, Jinja2, MarkupSafe
+#
+# Paginator:             six
+# Active-SQLAlchemy:     Paginator, pg8000, PyMySQL, SQLAlchemy, six
+
+#[System Administrator Tools]
+# nethogs：libpcap
+
+
+
+
+beecrypt for net-snmp:
+http://sourceforge.net/projects/beecrypt/
+
+rrdtool(依赖freetype、libpng、libart_lgpl、zlib)：
+wget http://oss.oetiker.ch/rrdtool/pub/libs/cairo-1.4.10.tar.gz
+wget http://www.cairographics.org/releases/cairo-1.8.10.tar.gz
+
+wget http://oss.oetiker.ch/rrdtool/pub/libs/pango-1.21.1.tar.bz2
+wget http://oss.oetiker.ch/rrdtool/pub/libs/freetype-2.3.5.tar.gz
+wget http://oss.oetiker.ch/rrdtool/pub/libs/libart_lgpl-2.3.17.tar.gz
+wget http://oss.oetiker.ch/rrdtool/pub/rrdtool-1.4.8.tar.gz
+
+zabbix：
+http://jaist.dl.sourceforge.net/project/zabbix/ZABBIX%20Latest%20Stable/2.2.5/zabbix-2.2.5.tar.gz
+http://www.zabbix.com/download.php
+
+http://www.fping.org/dist/fping-3.10.tar.gz
+
+http://www.percona.com/redir/downloads/XtraBackup/XtraBackup-2.1.8/binary/Linux/x86_64/percona-xtrabackup-2.1.8-733-Linux-x86_64.tar.gz
+
+
+gearmand(for gearman[php ext]):
+https://launchpad.net/gearmand
+http://sourceforge.net/projects/boost/
+
+
+
+FastDHT:
+依赖包：
+http://download.oracle.com/berkeley-db/db-4.7.25.tar.gz
+http://www.oracle.com/technetwork/cn/products/berkeleydb/downloads/index-086374-zhs.html
+
+
+hadoop：
+http://mirror.bit.edu.cn/apache/hadoop/common/hadoop-1.2.1/hadoop-1.2.1.tar.gz
+http://mirror.bit.edu.cn/apache/hadoop/common/hadoop-2.4.1/hadoop-2.4.1.tar.gz
+hbase：
+http://mirrors.hust.edu.cn/apache/hbase/hbase-0.98.4/hbase-0.98.4-hadoop1-bin.tar.gz
+http://mirrors.hust.edu.cn/apache/hbase/hbase-0.98.4/hbase-0.98.4-hadoop2-bin.tar.gz
+http://mirrors.hust.edu.cn/apache/hbase/hbase-0.98.4/hbase-0.98.4-src.tar.gz
+zookeeper：
+http://mirror.bit.edu.cn/apache/zookeeper/zookeeper-3.4.6/zookeeper-3.4.6.tar.gz
+kafka：
+http://mirrors.cnnic.cn/apache/kafka/0.8.2.1/kafka_2.10-0.8.2.1.tgz
+storm
+http://mirrors.cnnic.cn/apache/storm/apache-storm-0.9.5/apache-storm-0.9.5.tar.gz
+spark
+http://mirrors.hust.edu.cn/apache/spark/spark-1.4.1/spark-1.4.1-bin-without-hadoop.tgz

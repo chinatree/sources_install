@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# Compile services of tengine function
+compile_tengine()
+{
+    local config_action=${1:-None}
+    clean_tmp
+
+    local module="tengine"
+    local version="${tengine_version}"
+    local logfile=""${install_log_dir}"/"${module}".log"
+    cp -a "${packets_dir}"/"${module}"-"${version}".tar.gz "${tmp_dir}"
+    cp -a "${libs_dir}"/pcre-"${libs_pcre_version}".tar.gz "${tmp_dir}"
+    cd "${tmp_dir}"
+
+    tar xf "${module}"-"${version}".tar.gz
+    tar xf pcre-"${libs_pcre_version}".tar.gz
+    cd "${module}"-"${version}"
+    echo -n "Compile `get_color "${module}"-"${version}" CYANBLUE` to `get_color "${install_dir_prefix}" UNDERLINE` ... "
+    ./configure --prefix="${install_dir_prefix}"/"${module}"-"${version}" --with-http_gzip_static_module --with-http_ssl_module --with-pcre="${tmp_dir}"/pcre-"${libs_pcre_version}" --with-http_sub_module --with-http_stub_status_module --with-syslog > "${logfile}" 2>&1
+    make >> "${logfile}" 2>&1
+    make install >> "${logfile}" 2>&1
+    get_exit_code $? 1
+
+    # configuration
+    if [ "${config_action}" = "auto_config" ];
+    then
+        "${AUTO_CONFIG_SH}" -t "${module}"
+    fi
+
+    clean_tmp
+}

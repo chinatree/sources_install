@@ -1,0 +1,79 @@
+==Q:==
+lua 的 php 扩展包 make 时报错：
+/usr/local/services/lua-5.2.3/lib/liblua.a: could not read symbols: Bad value
+==A:==
+出现环境：x64
+修改lua程序(不是php扩展源码包)的 src/MakeFile 文件增加 -fPIC 参数
+CFLAGS= -O2 -Wall ...
+修改为
+CFLAGS= -O2 -Wall -fPIC ...
+
+==Q:==
+gearmand 安装报错：
+checking for Boost headers version >= 1.39.0... no
+configure: error: cannot find Boost headers version >= 1.39.0
+==A:==
+
+==Q:==
+/lib/x86_64-linux-gnu/libpthread.so.0 so try adding it to the linker command line
+/lib/x86_64-linux-gnu/libpthread.so.0: could not read symbols: Invalid operation
+collect2: error: ld returned 1 exit status
+==A:==
+类似错误，需要在makefile中增加－ldl -lpthread参数
+
+==Q:==
+libxml2 >= 2.9 版本安装报错：
+libxml.c:3914: warning: implicit declaration of function 'Py_InitModule'
+libxml.c:3914: warning: nested extern declaration of 'Py_InitModule'
+==A:==
+升级 Python >= 2.7.5
+
+==Q:==
+rrdtool 1.4.8 版本安装报错：
+Can't locate ExtUtils/MakeMaker.pm in @INC (@INC contains: /usr/local/lib64/perl5 /usr/local/share/perl5 /usr/lib64/perl5/vendor_perl /usr/share/perl5/vendor_perl /usr/lib64/perl5 /usr/share/perl5 .) at Makefile.PL line 1.
+BEGIN failed--compilation aborted at Makefile.PL line 1.
+==A:==
+安装 perl-devel 包解决
+yum -y install perl-devel
+
+【Salt】
+==Q:==
+AttributeError: 'module' object has no attribute 'PKCS5_SALT_LEN' 
+==A:==
+由于Pyzmq引用了 M2crypto 这个包，而这个包需要使用swig，我安装的swig版本是3.0.5,当你的swig是3.0.5的时候便会报上面的错误，详细的Issue参见 https://github.com/M2Crypto/M2Crypto/issues/24 , 重新编译了3.0.4版本的swig从而跳过这个错误。
+
+==Q:==
+OSError: Could not locate nacl lib, searched for libsodium.so, libsodium.so.13, libsodium.so.10, libsodium.so.5, libsodium.so.4,  and tweetnacl.so
+==A:==
+libnacl 依赖 libsodium，安装 libsodium 并添加到动态库加载方式解决
+
+【Heartbeat】
+1、libtoolize: `COPYING.LIB' not found in `/usr/share/libtool/libltdl'
+解决方法：
+yum -y install libtool-ltdl-devel
+ 
+2、checking for special libxml2 includes... configure: error: libxml2 config not found
+解决方法：
+yum -y install libxml2
+ 
+3、configure: error: BZ2 libraries not found
+解决方法：
+yum -y install bzip2-devel glib2-devel
+ 
+4、gmake[1]: *** [strlcpy.lo] Error 1
+解决方法：
+将 /usr/local/heartbeat/include/heartbeat/glue_config.h 的105行删除或注释掉。
+
+5、gmake[4]: *** [ucast.lo] 错误 1
+解决方法：
+Heartbeat-3-0-7e3a82377fa8/lib/plugins/HBcomm/ucast.c 这个文件貌似有问题，删除468行int i = 1;应该就能make了。（这个真心坑爹）
+
+6、gmake[1]: --xinclude: Command not found
+解决方法：
+yum -y install libxslt-devel
+
+【Nodejs】
+1、ImportError: No module named bz2
+解决方法：
+1. 系统安装 bzip2-devel 基础库的包
+2. 重新编译 python 以支持 bzip2

@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+
+<configuration>
+    <property>
+        <name>yarn.nodemanager.aux-services</name>
+        <value>mapreduce_shuffle</value>
+    </property>
+    <property>
+        <name>yarn.nodemanager.aux-services.mapreduce.shuffle.class</name>
+        <value>org.apache.hadoop.mapred.ShuffleHandler</value>
+    </property>
+    <!--
+        yarn.resourcemanager.address
+        新框架中 NodeManager 与 ResourceManager 通信的接口地址。
+    -->
+    <property>
+        <name></name>
+        <value>10.10.8.92:8032</value>
+    </property>
+    <!--
+        yarn.resourcemanager.scheduler.address
+        NodeManger 需要知道 ResourceManager 主机的 scheduler 调度服务接口地址
+    -->
+    <property>
+        <name>yarn.resourcemanager.scheduler.address</name>
+        <value>10.10.8.92:8030</value>
+    </property>
+    <!--
+        yarn.resourcemanager.scheduler.address
+        NodeManager 需要向 ResourceManager 报告任务运行状态供 Resouce 跟踪，
+        因此 NodeManager 节点主机需要知道 ResourceManager 主机的 tracker 接口地址。
+    -->
+    <property>
+        <name>yarn.resourcemanager.resource-tracker.address</name>
+        <value>10.10.8.92:8031</value>
+    </property>
+    <property>
+        <name>yarn.resourcemanager.admin.address</name>
+        <value>10.10.8.92:8033</value>
+    </property>
+    <!--
+        yarn.resourcemanager.webapp.address
+        新框架中各个 task 的资源调度及运行状况通过通过该 web 界面访问。
+    -->
+    <property>
+        <name>yarn.resourcemanager.webapp.address</name>
+        <value>10.10.8.92:8088</value>
+    </property>
+</configuration>
+

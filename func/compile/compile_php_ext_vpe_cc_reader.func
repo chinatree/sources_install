@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Compile php ext of vpe_cc_reader function
+compile_php_ext_vpe_cc_reader()
+{
+    clean_tmp
+
+    local module="vpe_cc_reader"
+    local version="${php_ext_mongo_version}"
+    local logfile=""${install_log_dir}"/php_ext_"${module}".log"
+    cp -a "${php_exts_dir}"/"${module}".tar.gz "${tmp_dir}"
+    cd "${tmp_dir}"
+
+    tar xf "${module}".tar.gz
+    cd "${module}"
+    echo -n "Compile `get_color "${module}" CYANBLUE` for php extension ... "
+    make > "${logfile}" 2>&1
+    cd client/c
+    make >> "${logfile}" 2>&1
+    cd ../php_ext
+    ${install_dir_prefix}/php/bin/phpize >> "${logfile}" 2>&1
+    ./configure --prefix="${install_dir_prefix}"/"${module}"-"${version}" >> "${logfile}" 2>&1
+    make >> "${logfile}" 2>&1
+    make install >> "${logfile}" 2>&1
+    get_exit_code $? 0
+
+    clean_tmp
+}

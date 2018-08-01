@@ -1,0 +1,31 @@
+CentOS 6.4
+【以 root 用户执行】
+/usr/sbin/useradd -s /bin/bash -c "Admin User" -d /home/test test
+chmod 755 /home/test
+passwd test
+visudo -f /etc/sudoers
+================================  /etc/sudoers  ================================
+Defaults secure_path = /sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin
+test ALL=(ALL) NOPASSWD:ALL
+================================  /etc/sudoers  ================================
+
+【以 test 用户执行】
+配网络(初始IP是192.168.4.66/192.168.1.66)、DNS、清防火墙、关SELINUX
+iptables -F
+/etc/init.d/iptables save
+sed -i 's/SELINUX=enforcing/SELINUX=disabled/' /etc/selinux/config
+/usr/sbin/ntpdate 210.72.145.44
+chkconfig --level 12345 ip6tables off
+
+sudo yum update
+sudo yum -y install vim ntp gcc gcc-c++ make automake autoconf rsync wget man lsof openssl openssl-devel telnet traceroute bind-utils openssh-clients parted iptables lvm2 curl strace patch unzip ncurses-devel flex bison libuuid-devel libtool expat-devel
+
+cat /dev/null > /var/log/lastlog
+cat /dev/null > /var/log/dmesg
+cat /dev/null > /var/log/lastlog
+cat /dev/null > /var/log/messages
+cat /dev/null > /var/log/secure
+cat /dev/null > /var/log/wtmp
+cat /dev/null > /var/log/yum.log
+cat /dev/null > ~/.bash_history
+history -c

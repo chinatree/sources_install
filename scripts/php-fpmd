@@ -1,0 +1,192 @@
+#!/bin/bash
+# author   : chinatree <chinatree2012@gmail.com>
+# date     : 2012-12-19
+#chkconfig:345 62 62
+#description:php-fpmd server daemon
+
+RETVAL=0
+prog="php-fpm"
+
+# [global]
+SCRIPT_PATH=$(cd "$(dirname "$0")"; pwd)
+SCRIPT_NAME=$(basename "$0")
+PHP_FPM_BIN="/opt/applications/php/sbin/php-fpm"
+PHP_FPM_CONF="/opt/applications/php/etc/php-fpm.conf"
+PHP_FPM_PID="/opt/applications/php/var/run/php-fpm.pid"
+PHP_FPM_OPTS="--fpm-config ${PHP_FPM_CONF}"
+
+ulimit -SHn 65535
+
+get_color()
+{
+    case "$2" in
+    RED)
+        echo -ne "\033[31m"$1"\033[0m"
+        ;;
+
+    GREEN)
+        echo -ne "\033[32m"$1"\033[0m"
+        ;;
+
+    *)
+        echo -ne "$1"
+        ;;
+    esac
+}
+
+get_exit_code()
+{
+    if [ "$?" -ne 0 ];then
+        echo "[`get_color " FAILED " RED`]"
+        exit "$1"
+    else
+        echo "[`get_color "   OK   " GREEN`]"
+    fi
+}
+
+wait_for_pid () {
+    try=0
+
+    while test "${try}" -lt 35 ; do
+        case "$1" in
+        'created')
+            if [ -f "$2" ] ; then
+                try=''
+                break
+            fi
+            ;;
+
+        'removed')
+            if [ ! -f "$2" ] ; then
+                try=''
+                break
+            fi
+            ;;
+        esac
+
+        echo -n "."
+        try=`expr ${try} + 1`
+        sleep 1s
+    done
+}
+
+chk_php_fpm_pid () {
+    if [ ! -r "${PHP_FPM_PID}" ] ; then
+        echo "WARNING:`get_color " the "${PHP_FPM_PID}" file not found, php-fpm is not runing ?" RED`"
+        exit 1
+    fi
+}
+
+start () {
+    echo -n "Starting ${prog}: "
+
+    ${PHP_FPM_BIN} ${PHP_FPM_OPTS}
+    RETVAL=$?
+    
+    wait_for_pid created ${PHP_FPM_PID}  
+    
+    if [ -n "${try}" ] ; then
+        RETVAL="1"
+    fi
+    
+    get_exit_code ${RETVAL}
+    return ${RETVAL} 
+}
+
+stop () {
+    echo -n "Shutting down php_fpm: "
+    chk_php_fpm_pid
+
+    kill -TERM `cat ${PHP_FPM_PID}`
+    RETVAL=$?
+
+    wait_for_pid removed ${PHP_FPM_PID}
+    if [ -n "$try" ] ; then
+        RETVAL="1"
+    fi
+    
+    get_exit_code ${RETVAL}
+    return ${RETVAL}
+}
+
+quit () {
+    echo -n "Gracefully shutting down php_fpm: "
+    chk_php_fpm_pid
+    
+    kill -QUIT `cat ${PHP_FPM_PID}`
+    RETVAL=$?
+    
+    wait_for_pid removed ${PHP_FPM_PID}
+    if [ -n "$try" ] ; then
+        RETVAL="1"
+    fi
+    
+    get_exit_code ${RETVAL}
+    return ${RETVAL}
+}
+
+reload () {
+    echo -n "Reload service php-fpm: "
+    chk_php_fpm_pid
+
+    kill -USR2 `cat ${PHP_FPM_PID}`
+    RETVAL=$?
+    get_exit_code ${RETVAL}
+    return ${RETVAL}    
+}
+
+logrotate () {
+    echo -n "Re-opening php-fpm log file: "
+    chk_php_fpm_pid
+
+    kill -USR1 `cat ${PHP_FPM_PID}`
+    RETVAL=$?
+    get_exit_code ${RETVAL}
+    return ${RETVAL}   
+}
+
+usage () {
+    echo -e "`get_color "Usage:" CYANBLUE` \
+    \n    ./"${SCRIPT_NAME}" {start|stop|quit|restart|reload|logrotate}"
+    exit 2
+}
+
+case "$1" in
+start)
+    start
+    RETVAL=$?
+    ;;
+
+stop)
+    stop
+    RETVAL=$?
+    ;;
+
+quit)
+    quit
+    RETVAL=$?
+    ;;
+
+restart)
+    stop
+    sleep 1s
+    start
+    RETVAL=$?
+    ;;
+
+reload)
+    reload
+    RETVAL=$?
+    ;;
+
+logrotate)
+    logrotate
+    RETVAL=$?
+    ;;
+
+*)
+    usage
+    ;;
+esac
+
+exit ${RETVAL}

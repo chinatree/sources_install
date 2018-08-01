@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Compile python ext of pyaml function
+compile_python_ext_pyaml()
+{
+    clean_tmp
+
+    local module="pyaml"
+    local version="${python_ext_pyaml_version}"
+    local logfile=""${install_log_dir}"/python_ext_"${module}".log"
+    cp -a "${python_exts_dir}"/"${module}"-"${version}".tar.gz "${tmp_dir}"
+    cd "${tmp_dir}"
+
+    tar xf "${module}"-"${version}".tar.gz
+    cd "${module}"-"${version}"
+    echo -n "Compile `get_color "${module}"-"${version}" CYANBLUE` for python extension ... "
+    ${install_dir_prefix}/Python/bin/python setup.py install >> "${logfile}" 2>&1
+    get_exit_code $? 0
+
+    clean_tmp
+}

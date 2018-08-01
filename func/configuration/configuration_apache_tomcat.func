@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Configuration services of tomcat function
+configuration_apache_tomcat()
+{
+    local module="tomcat"
+    local version="${apache_tomcat_version}"
+    local logfile="${install_log_dir}/${module}.log"
+    local account="hadoop"
+    local profile_file="/etc/profile"
+
+    [ ! -h "${install_dir_prefix}/${module}" ] && cd "${install_dir_prefix}" && ln -sf "${module}-${version}" "${module}"
+
+    chk_not_exists_user "${account}"
+    if [ $? -eq 1 ];
+    then
+        groupadd -r "${account}" 
+        useradd -r -s /sbin/nologin -g "${account}" "${account}"
+    fi
+    chown -R "${account}"."${account}" "${install_dir_prefix}/${module}-${version}"
+}

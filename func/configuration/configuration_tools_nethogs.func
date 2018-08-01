@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Configuration services redis function
+configuration_tools_nethogs()
+{
+    local module="nethogs"
+    local version="${tools_nethogs_version}"
+
+    [ ! -h "${install_tools_prefix}/${module}" ] && cd "${install_tools_prefix}" && ln -sf "${module}-${version}" "${module}"
+    ln -sf "${install_tools_prefix}/${module}"/sbin/nethogs "${path_local_bin}"
+}

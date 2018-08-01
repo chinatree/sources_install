@@ -1,0 +1,53 @@
+#!/bin/bash
+# author   : chinatree <chinatree2012@gmail.com>
+# date     : 2012-12-19
+#chkconfig:345 62 62
+#description:mysqld server daemon
+
+RETVAL=0
+prog="mysqld"
+
+MYSQL_BIN="/opt/applications/mysql/bin"
+MYSQL_PORT="3306"
+MYSQL_DATA_DIR="/opt/applications_data/mysql/${mysql_port}"
+MYSQL_SA_USER="manage"
+MYSQL_SA_PASS="M@nag3.SQL"
+MYSQL_CONF_conf="${MYSQL_DATA_DIR}/my.cnf"
+
+function_start_mysql()
+{
+    printf "Starting MySQL...\n"
+    /bin/bash ${MYSQL_BIN}/mysqld_safe --defaults-file=${mysql_conf} > /dev/null 2>&1 &
+}
+
+function_stop_mysql()
+{
+    printf "Stoping MySQL...\n"
+    ${mysql_bin}/mysqladmin -u ${MYSQL_SA_USER} -p${MYSQL_SA_PASS} -S /tmp/mysql.sock shutdown
+}
+
+function_restart_mysql()
+{
+    printf "Restarting MySQL...\n"
+    function_stop_mysql
+    sleep 5
+    function_start_mysql
+}
+
+function_kill_mysql()
+{
+    kill -9 $(ps -ef | grep 'bin/mysqld_safe' | grep ${mysql_port} | awk '{printf $2}')
+    kill -9 $(ps -ef | grep 'libexec/mysqld' | grep ${mysql_port} | awk '{printf $2}')
+}
+
+if [ "$1" = "start" ]; then
+    function_start_mysql
+elif [ "$1" = "stop" ]; then
+    function_stop_mysql
+elif [ "$1" = "restart" ]; then
+    function_restart_mysql
+elif [ "$1" = "kill" ]; then
+    function_kill_mysql
+else
+    printf "Usage: ${mysql_data_dir}mysql {start|stop|restart|kill}\n"
+fi

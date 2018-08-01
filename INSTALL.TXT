@@ -1,0 +1,102 @@
+/*************************************
+ *  下载并解压安装包
+ *************************************/
+wget http://ops.yuntree.com/tools/sources_install.v1.0.tar.gz
+tar xf sources_install.v1.0.tar.gz
+cd sources_install
+
+/*************************************
+ *  初始化权限及合并func
+ *************************************/
+bash toolchains/init_mode.sh
+
+/*************************************
+ *  【可选】自动检测系统类型并安装基础/依赖包
+ *  0 -> 禁用， 1 -> 启用， 默认启用
+ *
+ * 注：
+ * Redhat/CentOS 需要 YUM 支持
+ * Ubuntu/Debian 需要 APT-GET 支持
+ * Suse 需要 YAST 支持
+ *************************************/
+IS_INSTALL_BASE=0
+
+/*************************************
+ *  【可选】在配置 IS_INSTALL_BASE=0 时必须执行
+ *************************************/
+For CentOS/RedHat:
+yum -y install vim gcc gcc-c++ make automake autoconf rsync wget man lsof openssl openssl-devel telnet traceroute bind-utils openssh-clients parted iptables lvm2 curl strace ncurses-devel flex bison libuuid-devel libtool  expat-devel
+
+For Ubuntu/Debian:
+aptitude update
+apt-get install vim gcc g++ make autoconf rsync wget man-db lsof openssl telnet traceroute parted iptables lvm2 curl strace 
+apt-get install libssl-dev libncurses-dev libcurl4-openssl-dev uuid-dev libtool libreadline-dev libexpat1-dev
+
+/*************************************
+ *  一键全自动安装 LNMP 包
+ * 日志文件可以在 <path>/logs/<YYYYMMDD>/<MODULE>.log 查看
+ *
+ * 注：
+ * 如果你当前用户是 root 则可以省略 sudo
+ * 如果你当前用户是非 root 则需要支持 sudo 功能，否则会有权限问题
+ *
+ * 只要有一个包有错误，程序会自动中断结束
+ * 如在时间允许情况下，想全新开始可执行以下命令:
+ * rm -rf /usr/local/services
+ * rm -rf /data/mysql
+ * Ps.默认全新机器是没这两个目录，如非全新机器，请确认这两个目录下没有不可删除的重要文件
+ *************************************/
+sudo ./auto_install.sh -a install -t lnmp
+
+
+/*************************************
+ * auto_install 参数介绍
+ * -f 指定扩展文件，仅在 -t 指定为 custom 时有效，详见后面扩展介绍
+ *************************************/
+ -a 指定行为，支持 install, upgrade, uninstall
+  install 编译安装
+  upgrade 编译升级(暂不支持)
+  uninstall 卸载(暂不支持)
+
+ -t 指定安装分类，支持交互和非交互
+  interact 安装所有包，每一个包都交互提示，有冲突的包有：
+   nginx 和 nginx_with_modules 只能装其一
+   因为含 FastDFS 模块的 nginx 会因 FastDFS 的配置文件不存在而启动/重启失败
+
+   php 和 php_httpd 只能装其一
+   编译参数限制问题
+
+  interact_lnmp 交互提示安装 LNMP 包，含 Cache
+
+  interact_lamp 交互提示安装 LAMP 包，含 Cache
+
+  interact_phpexts 交互提示安装 PHP 的扩展
+
+  interact_libs 交互提示安装 lib 包
+
+  interact_other 交互安装其他软件包
+
+  lnmp 全自动安装 LNMP 包
+
+  lamp 全自动安装 LAMP 包
+
+  web 全自动安装 LNP 包
+
+  db 全自动安装 db 包
+
+  cache 全自动安装 Cache 包
+
+  libs 全自动安装 lib 包
+
+  php_exts 全自动安装 php 扩展包
+
+  python_exts 全自动安装 python 扩展包
+
+  monitor 全自动安装监控包
+
+  other 全自动安装其他软件包
+
+  custom 自定义扩展
+   需要和 -f 参数结合使用
+   -f 指定的文件的格式要求：
+   每一个函数一行，程序将根据函数名调用对应函数，有参数的在函数名后面加空格分隔

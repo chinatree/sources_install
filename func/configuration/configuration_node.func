@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Configuration services node function
+configuration_node()
+{
+    local module="node"
+    local version="${node_version}"
+
+    [ ! -h "${install_dir_prefix}/${module}" ] && cd "${install_dir_prefix}" && ln -sf "${module}"-"${version}" "${module}"
+    ln -sf "${install_dir_prefix}/${module}/bin/node" "${path_local_bin}/node"
+    ln -sf "${install_dir_prefix}/${module}/bin/npm" "${path_local_bin}/npm"
+}

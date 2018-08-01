@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Configuration library fping function
+configuration_libs_fping()
+{
+    local module="fping"
+    local version="${libs_fping_version}"
+
+    [ ! -h "${install_libs_dir_prefix}/${module}" ] && cd "${install_libs_dir_prefix}" && ln -sf "${module}"-"${version}" "${module}"
+    ln -sf "${install_libs_dir_prefix}/${module}/sbin/fping" "${path_local_bin}/fping"
+    ln -sf "${install_libs_dir_prefix}/${module}/sbin/fping6" "${path_local_bin}/fping6"
+}

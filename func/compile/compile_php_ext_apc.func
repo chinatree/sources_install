@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Compile php ext of function
+compile_php_ext_apc()
+{
+    clean_tmp
+
+    local module="APC"
+    local version="${php_ext_APC_version}"
+    local logfile=""${install_log_dir}"/php_ext_"${module}".log"
+    cp -a "${php_exts_dir}"/"${module}"-"${version}".tgz "${tmp_dir}"
+    cd "${tmp_dir}"
+
+    tar xf "${module}"-"${version}".tgz
+    cd "${module}"-"${version}"
+    echo -n "Compile `get_color "${module}"-"${version}" CYANBLUE` for php extension ... "
+    ${install_dir_prefix}/php/bin/phpize > "${logfile}" 2>&1
+    ./configure --prefix="${install_dir_prefix}"/"${module}"-"${version}" --enable-apc --enable-apc-mmap >> "${logfile}" 2>&1
+    make >> "${logfile}" 2>&1
+    make install >> "${logfile}" 2>&1
+    get_exit_code $? 0
+
+    clean_tmp
+}

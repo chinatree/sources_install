@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# Compile services of modsecurity function
+compile_modsecurity()
+{
+    local config_action=${1:-None}
+    clean_tmp
+
+    local module="modsecurity"
+    local version="${modsecurity_version}"
+    local logfile=""${install_log_dir}"/"${module}".log"
+    cp -a "${packets_dir}"/"${module}"-"${version}".tar.gz "${tmp_dir}"
+    cd "${tmp_dir}"
+
+    tar xf "${module}"-"${version}".tar.gz
+    cd "${module}"-"${version}"
+    echo -n "Compile `get_color "${module}"-"${version}" CYANBLUE` to `get_color "${install_dir_prefix}" UNDERLINE` ... "
+    ./configure --prefix="${install_dir_prefix}"/"${module}"-"${version}" --enable-standalone-module > "${logfile}" 2>&1
+    make >> "${logfile}" 2>&1
+    make install >> "${logfile}" 2>&1
+    get_exit_code $? 1
+
+    # configuration
+    if [ "${config_action}" = "auto_config" ];
+    then
+        "${AUTO_CONFIG_SH}" -t "${module}"
+    fi
+
+    clean_tmp
+}

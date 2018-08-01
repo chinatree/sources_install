@@ -1,0 +1,14 @@
+#!/bin/bash
+
+version_format()
+{
+    local soft="${1:-None}"
+    local ver="${2:-1.0.0}"
+    local isblank="${3:-None}"
+    if [ "${isblank}" = "Y" ];
+    then
+        printf "    %-20s%-20s\n\n" "${soft}" "${ver}"
+    else
+        printf "    %-20s%-20s\n" "${soft}" "${ver}"
+    fi
+}

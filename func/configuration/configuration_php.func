@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Configuration services php function
+configuration_php()
+{
+    local module="php"
+    local version="${php_version}"
+    local etc_dir="${etc_dir}/${module}"
+
+    [ ! -h "${install_dir_prefix}/${module}" ] && cd "${install_dir_prefix}" && ln -sf "${module}-${version}" "${module}"
+    [ ! -d "${install_dir_prefix}/${module}-${version}/etc/extends" ] && mkdir -p "${install_dir_prefix}/${module}-${version}/etc/extends"
+    [ -f "${etc_dir}/${module}-${version%.*}.ini" ] && cp -a "${etc_dir}/${module}-${version%.*}.ini" "${install_dir_prefix}/${module}-${version}/etc/php.ini"
+    [ -f "${etc_dir}/${module}-fpm-${version%.*}.conf" ] && cp -a "${etc_dir}/${module}-fpm-${version%.*}.conf" "${install_dir_prefix}/${module}-${version}/etc/php-fpm.conf"
+    [ -f "${install_dir_prefix}/${module}-${version}/etc/php-fpm.conf.default" ] && rm -f "${install_dir_prefix}/${module}-${version}/etc/php-fpm.conf.default"
+    ln -sf "${install_dir_prefix}/${module}/bin/php" "${path_local_bin}/php"
+    ln -sf "${install_dir_prefix}/${module}/bin/phpize" "${path_local_bin}/phpize"
+    ln -sf "${install_dir_prefix}/${module}/bin/php-config" "${path_local_bin}/php-config"
+}

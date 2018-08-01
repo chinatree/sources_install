@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Configuration services of mongodb function
+configuration_mongodb()
+{
+    local module="mongodb"
+    local version="${mongodb_version}"
+
+    [ ! -h "${install_dir_prefix}/${module}" ] && cd "${install_dir_prefix}" && ln -sf "${module}"-"${version}" "${module}"
+    test ! -d "${install_dir_prefix}/${module}-${version}/etc" && mkdir -p "${install_dir_prefix}/${module}-${version}/etc"
+
+    ln -sf "${install_dir_prefix}"/"${module}"/bin/mongo "${path_local_bin}"
+    ln -sf "${install_dir_prefix}"/"${module}"/bin/mongod "${path_local_bin}"
+    ln -sf "${install_dir_prefix}"/"${module}"/bin/mongodump "${path_local_bin}"
+    ln -sf "${install_dir_prefix}"/"${module}"/bin/mongorestore "${path_local_bin}"
+}

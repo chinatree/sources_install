@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Configuration python ext of function
+configuration_python_ext_salt()
+{
+    local module="Python"
+    local version="${python_ext_setuptools_version}"
+
+    ln -sf "${install_dir_prefix}/${module}/bin/salt" "${path_local_bin}"
+    ln -sf "${install_dir_prefix}/${module}/bin/salt-master" "${path_local_bin}"
+    ln -sf "${install_dir_prefix}/${module}/bin/salt-minion" "${path_local_bin}"
+    ln -sf "${install_dir_prefix}/${module}/bin/salt-ssh" "${path_local_bin}"
+    ln -sf "${install_dir_prefix}/${module}/bin/salt-key" "${path_local_bin}"
+    ln -sf "${install_dir_prefix}/${module}/bin/salt-run" "${path_local_bin}"
+}

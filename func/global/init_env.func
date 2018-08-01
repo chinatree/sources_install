@@ -1,0 +1,6 @@
+#!/bin/bash
+
+init_env()
+{
+    mkdir -p "${path_local_bin}" "${install_log_dir}" "${tmp_dir}" "${install_dir_prefix}"  "${install_libs_dir_prefix}"
+}

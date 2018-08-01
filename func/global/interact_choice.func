@@ -1,0 +1,17 @@
+#!/bin/bash
+
+interact_choice()
+{
+    local prompt_str="${1:-None}"
+    local execute_cmd="${2:-None}"
+    if [ "${prompt_str}" = "None" ] || [ "${execute_cmd}" = "None" ];
+    then
+        echo "Call a function(interact_choice) parameter error!"
+    else
+        prompt "${prompt_str}"
+        if [ $? -eq 1 ];
+        then
+            ${execute_cmd}
+        fi
+    fi
+}

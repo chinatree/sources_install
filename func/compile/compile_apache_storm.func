@@ -1,0 +1,40 @@
+#!/bin/bash
+
+# Compile services of hbase function
+compile_apache_hbase()
+{
+    local config_action=${1:-None}
+    clean_tmp
+
+    local module="hbase"
+    local version="${apache_hbase_version}"
+    local packet_file="${packets_dir}/${module}-${version}-hadoop2-bin.tar.gz"
+    local logfile="${install_log_dir}/${module}.log"
+    if [ ! -f "${packet_file}" ];
+    then
+        echo -n "The file `get_color "${packet_file}" UNDERLINE` not exists ... "
+        get_exit_code 1 0
+        return
+    fi
+    cp -a "${packet_file}" "${tmp_dir}"
+    cd "${tmp_dir}"
+
+    tar xf "${packet_file}"
+    echo -n "Compile `get_color "${module}-${version}" CYANBLUE` to `get_color "${install_dir_prefix}" UNDERLINE` ... "
+    if [ -d "${install_dir_prefix}/${module}-${version}" ];
+    then
+        get_exit_code 1 0
+        echo `get_color "The folder ${install_dir_prefix}/${module}-${version} exists, please remove it and try again!" RED` | tee "${logfile}" 2>&1
+    else
+        mv "${module}-${version}-hadoop2" "${install_dir_prefix}/${module}-${version}" >> "${logfile}" 2>&1
+        get_exit_code $? 0
+
+        # configuration
+        if [ "${config_action}" = "auto_config" ];
+        then
+            "${AUTO_CONFIG_SH}" -t "${module}"
+        fi
+    fi
+
+    clean_tmp
+}

@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Configuration services uuid function
+configuration_uuid()
+{
+    local module="uuid"
+    local version="${uuid_version}"
+
+    if [ ! -d "${install_dir_prefix}/${module}"-"${version}" ];
+    then
+        [ ! -h "${install_dir_prefix}/${module}" ] && cd "${install_dir_prefix}" && ln -sf "${module}"-"${version}" "${module}"
+    fi
+}

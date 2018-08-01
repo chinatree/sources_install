@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Optimize kernel argv
+optimize_kernel_argv()
+{
+    local module="kernelArgv"
+    local version="2.6.32"
+    local logfile=""${install_log_dir}"/"${module}".log"
+    local sysctl_file="/etc/sysctl.conf"
+    local added_flag
+
+    added_flag=$(less "${sysctl_file}" | grep '# Added Flag' | wc -l)
+    if test "${added_flag}" -eq 0
+    then
+        cat <<EOF >> "${sysctl_file}"
+
+# Added Flag
+net.ipv4.ip_default_ttl = 128
+net.ipv4.tcp_tw_reuse = 1
+net.ipv4.tcp_tw_recycle = 1
+net.ipv4.tcp_fin_timeout = 30
+net.ipv4.tcp_max_syn_backlog = 8192
+vm.swappiness = 10
+EOF
+    fi
+    /sbin/sysctl -p >> "${logfile}" 2>&1
+}

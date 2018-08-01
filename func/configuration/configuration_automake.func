@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Configuration services automake function
+configuration_automake()
+{
+    local module="automake"
+    local version="${automake_version}"
+
+    [ ! -h "${install_dir_prefix}/${module}" ] && cd "${install_dir_prefix}" && ln -sf "${module}-${version}" "${module}"
+    ln -sf "${install_dir_prefix}/${module}/bin/automake" "${path_local_bin}/automake"
+}

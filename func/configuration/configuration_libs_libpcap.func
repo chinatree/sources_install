@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Configuration library libpcap function
+configuration_libs_libpcap()
+{
+    local module="libpcap"
+    local version="${libs_libpcap_version}"
+    local ld_libs_file="/etc/ld.so.conf.d/auto_libs.conf"
+
+    [ ! -h "${install_libs_dir_prefix}/${module}" ] && cd "${install_libs_dir_prefix}" && ln -sf "${module}-${version}" "${module}"
+    if [ -f "${ld_libs_file}" ];
+    then
+        local added_flag=$(less "${ld_libs_file}" | grep "${install_libs_dir_prefix}/${module}/lib" | wc -l)
+        if [ "${added_flag}" -eq 0 ];
+        then
+            echo "${install_libs_dir_prefix}/${module}/lib" >> "${ld_libs_file}"
+        fi
+    else
+        echo "${install_libs_dir_prefix}/${module}/lib" > "${ld_libs_file}"
+    fi
+    /sbin/ldconfig
+}

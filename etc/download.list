@@ -1,0 +1,123 @@
+#[taxonomy]|module|download url|version|save relative paths
+##[Servers]|nginx|http://nginx.org/download/nginx-1.14.0.tar.gz|1.14.0|packets
+#[Servers]|mysql|https://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-5.7.21.tar.gz|5.7.21|packets
+#[Servers]|mariadb|http://mirrors.ustc.edu.cn/mariadb/mariadb-5.5.41/source/mariadb-5.5.41.tar.gz|5.5.41|packets
+#[Servers]|php|http://cn2.php.net/distributions/php-7.1.3.tar.gz|7.1.3|packets
+#[Servers]|memcached|http://www.memcached.org/files/memcached-1.4.24.tar.gz|1.4.24|packets
+#[Servers]|node|https://nodejs.org/dist/v6.10.0/node-v6.10.0.tar.gz|v6.10.0|packets
+#[Servers]|ImageMagick|http://www.imagemagick.org/download/ImageMagick-6.9.0-0.tar.bz2|6.9.0-0|packets
+#[Servers]|redis|http://download.redis.io/releases/redis-2.8.9.tar.gz|v2.8.9|packets
+#[Servers]|mongodb|http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-2.6.1.tgz|linux-x86_64-2.6.1|packets
+#[Servers]|uuid|ftp://ftp.ossp.org/pkg/lib/uuid/uuid-1.6.2.tar.gz|1.6.2|packets
+#[Servers]|scws|http://www.xunsearch.com/scws/down/scws-1.2.2.tar.bz2|1.2.2|packets
+#[Servers]|lighttpd|http://download.lighttpd.net/lighttpd/releases-1.4.x/lighttpd-1.4.35.tar.gz|1.4.35|packets
+#[Servers]|ipvsadm|http://www.linuxvirtualserver.org/software/kernel-2.6/ipvsadm-1.26.tar.gz|1.26|packets
+#[Servers]|keepalived|http://www.keepalived.org/software/keepalived-1.2.13.tar.gz|1.2.13|packets
+#[Servers]|tomcat|http://apache.fayea.com/apache-mirror/tomcat/tomcat-8/v8.0.9/bin/apache-tomcat-8.0.9.tar.gz|8.0.9|packets
+#[Servers]|httpd|http://apache.fayea.com/apache-mirror/httpd/httpd-2.4.9.tar.gz|2.4.9|packets
+#[Servers]|swig|http://jaist.dl.sourceforge.net/project/swig/swig/swig-3.0.2/swig-3.0.2.tar.gz|3.0.2|packets
+#[Servers]|rabbitmq-server|http://www.rabbitmq.com/releases/rabbitmq-server/v3.3.4/rabbitmq-server-3.3.4.tar.gz|3.3.4|packets
+#[Servers]|varnish|https://repo.varnish-cache.org/source/varnish-4.0.1.tar.gz|4.0.1|packets
+#[Servers]|hadoop|http://mirror.bit.edu.cn/apache/hadoop/common/hadoop-2.4.1/hadoop-2.4.1.tar.gz|2.4.1|packets
+#[Servers]|Python|https://www.python.org/ftp/python/2.7.9/Python-2.7.9.tgz|2.7.9|packets
+#[Servers]|beanstalkd|https://github.com/kr/beanstalkd/archive/v1.10.tar.gz|1.10|packets
+#
+# Libraries
+#[Libraries]|apr|http://mirrors.hust.edu.cn/apache/apr/apr-1.5.1.tar.bz2|1.5.1|packets/libs
+#[Libraries]|apr-util|http://mirrors.hust.edu.cn/apache/apr/apr-util-1.5.3.tar.bz2|1.5.3|packets/libs
+#[Libraries]|bzip2|http://www.bzip.org/1.0.6/bzip2-1.0.6.tar.gz|1.0.6|packets/libs
+#[Libraries]|libmcrypt|http://heanet.dl.sourceforge.net/project/mcrypt/Libmcrypt/2.5.8/libmcrypt-2.5.8.tar.gz|2.5.8|packets/libs
+#[Libraries]|curl|http://curl.haxx.se/download/curl-7.36.0.tar.gz|7.36.0|packets/libs
+#[Libraries]|e2fsprogs|http://jaist.dl.sourceforge.net/project/e2fsprogs/e2fsprogs/v1.42.9/e2fsprogs-1.42.9.tar.gz|1.42.9|packets/libs
+#[Libraries]|libevent|https://github.com/downloads/libevent/libevent/libevent-2.0.21-stable.tar.gz|2.0.21|packets/libs
+#[Libraries]|libgsasl|ftp://ftp.gnu.org/gnu/gsasl/libgsasl-1.8.0.tar.gz|1.8.0|packets/libs
+#[Libraries]|libiconv|http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.14.tar.gz|1.14|packets/libs
+#[Libraries]|libpng|http://jaist.dl.sourceforge.net/project/libpng/libpng16/1.6.10/libpng-1.6.10.tar.gz|1.6.10|packets/libs
+#[Libraries]|libxml2|ftp://xmlsoft.org/libxml2/libxml2-2.9.1.tar.gz|2.9.1|packets/libs
+#[Libraries]|pcre|https://ftp.pcre.org/pub/pcre/pcre-8.40.tar.bz2|8.40|packets/libs
+#[Libraries]|libpcap|http://www.tcpdump.org/release/libpcap-1.6.2.tar.gz|1.6.2|packets/tools
+#[Libraries]|libsodium|https://github.com/jedisct1/libsodium/releases/download/1.0.3/libsodium-1.0.3.tar.gz|1.0.3|packets/tools
+#[Libraries]|libffi|https://github.com/atgreen/libffi/archive/v3.2.1.tar.gz|3.2.1|packets/tools
+#
+# PHP Extensions
+#[PHP Extensions]|APC|http://pecl.php.net/get/APC-3.1.13.tgz|3.1.13|packets/php_exts
+#[PHP Extensions]|gearman|http://pecl.php.net/get/gearman-1.1.2.tgz|1.1.2|packets/php_exts
+#[PHP Extensions]|igbinary|http://pecl.php.net/get/igbinary-1.1.1.tgz|1.1.1|packets/php_exts
+#[PHP Extensions]|imagick|http://pecl.php.net/get/imagick-3.1.2.tgz|3.1.2|packets/php_exts
+#[PHP Extensions]|intl|http://pecl.php.net/get/intl-3.0.0.tgz|3.0.0|packets/php_exts
+#[PHP Extensions]|lua|http://pecl.php.net/get/lua-1.0.0.tgz|1.0.0|packets/php_exts
+#[PHP Extensions]|memcache|http://pecl.php.net/get/memcache-2.2.7.tgz|2.2.7|packets/php_exts
+#[PHP Extensions]|memcached|http://pecl.php.net/get/memcached-2.2.0.tgz|2.2.0|packets/php_exts
+#[PHP Extensions]|mongo|http://pecl.php.net/get/mongo-1.5.2.tgz|1.5.2|packets/php_exts
+#[PHP Extensions]|redis|http://pecl.php.net/get/redis-2.2.5.tgz|2.2.5|packets/php_exts
+#[PHP Extensions]|taint|http://pecl.php.net/get/taint-1.2.2.tgz|1.2.2|packets/php_exts
+#[PHP Extensions]|uuid|http://pecl.php.net/get/uuid-1.0.3.tgz|1.0.3|packets/php_exts
+#[PHP Extensions]|xcache|http://xcache.lighttpd.net/pub/Releases/3.1.0/xcache-3.1.0.tar.gz|3.1.0|packets/php_exts
+#[PHP Extensions]|xdebug|http://pecl.php.net/get/xdebug-2.2.5.tgz|2.2.5|packets/php_exts
+#[PHP Extensions]|yaf|http://pecl.php.net/get/yaf-2.2.9.tgz|2.2.9|packets/php_exts
+#
+#/*
+# * Python Exts
+# */
+#[Python Extensions]|setuptools|https://pypi.python.org/packages/source/s/setuptools/setuptools-3.6.tar.gz|3.6|packets/python_exts
+#[Python Extensions]|pip|https://pypi.python.org/packages/source/p/pip/pip-1.5.6.tar.gz|1.5.6|packets/python_exts
+#[Python Extensions]|Django for python|https://www.djangoproject.com/m/releases/1.6/Django-1.6.4.tar.gz|1.6.4|packets/python_exts
+#[Python Extensions]|MySQL-python|https://pypi.python.org/packages/source/M/MySQL-python/MySQL-python-1.2.5.zip|1.2.5|packets/python_exts
+#[Python Extensions]|pssh|https://pypi.python.org/packages/source/p/pssh/pssh-2.3.1.tar.gz|2.3.1|packets/python_exts
+#[Python Extensions]|protobuf|https://pypi.python.org/packages/source/p/protobuf/protobuf-2.5.0.tar.gz|2.5.0|packets/python_exts
+#[Python Extensions]|pymongo|https://pypi.python.org/packages/source/p/pymongo/pymongo-2.7.tar.gz|2.7|packets/python_exts
+#[Python Extensions]|readline|https://pypi.python.org/packages/source/r/readline/readline-6.2.4.1.tar.gz|6.2.4.1|packets/python_exts
+#[Python Extensions]|redis|https://pypi.python.org/packages/source/r/redis/redis-2.9.1.tar.gz|2.9.1|packets/python_exts
+#[Python Extensions]|bz2file|https://pypi.python.org/packages/source/b/bz2file/bz2file-0.98.tar.gz|0.98|packets/python_exts
+#[Python Extensions]|PyYAML|https://pypi.python.org/packages/source/P/PyYAML/PyYAML-3.11.tar.gz|3.11|packets/python_exts
+#[Python Extensions]|MarkupSafe|https://pypi.python.org/packages/source/M/MarkupSafe/MarkupSafe-0.23.tar.gz|0.23|packets/python_exts
+#[Python Extensions]|Jinja2|https://pypi.python.org/packages/source/J/Jinja2/Jinja2-2.7.3.tar.gz|2.7.3|packets/python_exts
+#[Python Extensions]|msgpack-python|https://pypi.python.org/packages/source/m/msgpack-python/msgpack-python-0.1.12.tar.gz|0.1.12|packets/python_exts
+#[Python Extensions]|pycrypto|https://pypi.python.org/packages/source/p/pycrypto/pycrypto-2.6.1.tar.gz|2.6.1|packets/python_exts
+#[Python Extensions]|M2Crypto|https://pypi.python.org/packages/source/M/M2Crypto/M2Crypto-0.22.3.tar.gz|0.22.3|packets/python_exts
+#[Python Extensions]|msgpack-pure|https://pypi.python.org/packages/source/m/msgpack-pure/msgpack-pure-0.1.3.tar.gz|0.1.3|packets/python_exts
+#[Python Extensions]|libnacl|https://pypi.python.org/packages/source/l/libnacl/libnacl-1.4.3.tar.gz|1.4.3|packets/python_exts
+#[Python Extensions]|backports.ssl_match_hostname|https://pypi.python.org/packages/source/b/backports.ssl_match_hostname/backports.ssl_match_hostname-3.4.0.2.tar.gz|3.4.0.2|packets/python_exts
+#[Python Extensions]|certifi|https://pypi.python.org/packages/source/c/certifi/certifi-2015.04.28.tar.gz|2015.04.28|packets/python_exts
+#[Python Extensions]|tornado|https://pypi.python.org/packages/source/t/tornado/tornado-4.2.1.tar.gz|4.2.1|packets/python_exts
+#[Python Extensions]|Mako|https://pypi.python.org/packages/source/M/Mako/Mako-0.5.0.tar.gz|0.5.0|packets/python_exts
+#[Python Extensions]|ioflo|https://pypi.python.org/packages/source/i/ioflo/ioflo-1.3.8.tar.gz|1.3.8|packets/python_exts
+#[Python Extensions]|six|https://pypi.python.org/packages/source/s/six/six-1.9.0.tar.gz|1.9.0|packets/python_exts
+#[Python Extensions]|enum34|https://pypi.python.org/packages/source/e/enum34/enum34-1.0.4.tar.gz|1.0.4|packets/python_exts
+#[Python Extensions]|raet|https://pypi.python.org/packages/source/r/raet/raet-0.6.3.tar.gz|0.6.3|packets/python_exts
+#[Python Extensions]|salt|https://pypi.python.org/packages/source/s/salt/salt-2015.5.3.tar.gz|2015.5.3|packets/python_exts
+#[Python Extensions]|pyaml|https://pypi.python.org/packages/source/p/pyaml/pyaml-14.05.7.tar.gz|14.05.7|packets/python_exts
+#[Python Extensions]|docutils|https://pypi.python.org/packages/source/d/docutils/docutils-0.11.tar.gz|0.11|packets/python_exts
+#[Python Extensions]|pyOpenSSL|https://pypi.python.org/packages/source/p/pyOpenSSL/pyOpenSSL-0.15.1.tar.gz|0.15.1|packets/python_exts
+#[Python Extensions]|websocket_client|https://pypi.python.org/packages/source/w/websocket-client/websocket_client-0.32.0.tar.gz|0.32.0|packets/python_exts
+#[Python Extensions]|docker-py|https://pypi.python.org/packages/source/d/docker-py/docker-py-1.3.1.tar.gz|1.3.1|packets/python_exts
+#[Python Extensions]|ipython|https://pypi.python.org/packages/source/i/ipython/ipython-3.2.1.tar.gz|3.2.1|packets/python_exts
+#[Python Extensions]|ansible|https://pypi.python.org/packages/source/a/ansible/ansible-1.9.2.tar.gz|1.9.2|packets/python_exts
+#[Python Extensions]|halite|https://pypi.python.org/packages/source/h/halite/halite-0.1.17.tar.gz|0.1.17|packets/python_exts
+#
+#
+#/**
+# * Tools
+# */
+#[System Administrator Tools]|nethogs|http://ncu.dl.sourceforge.net/project/nethogs/nethogs/0.8/nethogs-0.8.0.tar.gz|0.8.0|packets/tools
+#/*
+# * Monitor
+# */
+#[Monitor]|cacti|http://www.cacti.net/downloads/cacti-0.8.8b.tar.gz|0.8.8b|packets/monitor
+#[Monitor]|nagios|http://jaist.dl.sourceforge.net/project/nagios/nagios-4.x/nagios-4.0.7/nagios-4.0.7.tar.gz|4.0.7|packets/monitor
+#[Monitor]|zabbix|http://jaist.dl.sourceforge.net/project/zabbix/ZABBIX%20Latest%20Stable/2.2.5/zabbix-2.2.5.tar.gz|2.2.5|packets/monitor
+#
+#/*
+# * Nagios Exts
+# */
+#[Monitor]|nrpe|http://cznic.dl.sourceforge.net/project/nagios/nrpe-2.x/nrpe-2.15/nrpe-2.15.tar.gz|2.15|packets/monitor/nagios_exts
+#
+#
+#
+#
+#[Other]|icu|http://download.icu-project.org/files/icu4c/53.1/icu4c-53_1-src.tgz|53_1|packets
+#[Other]|sparkweb|http://download.igniterealtime.org/sparkweb/sparkweb_0_9_0.tar.gz|0_9_0|packets
+#[Other]|openfire|http://download.igniterealtime.org/openfire/openfire_3_9_3.tar.gz|3_9_3|packets
+#[Other]|ipvsadm|http://www.linuxvirtualserver.org/software/kernel-2.6/ipvsadm-1.26.tar.gz|1.26|packets
+#
+#

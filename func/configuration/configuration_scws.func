@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Configuration services scws function
+configuration_scws()
+{
+    local module="scws"
+    local version="${scws_version}"
+
+    [ ! -h "${install_dir_prefix}/${module}" ] && cd "${install_dir_prefix}" && ln -sf "${module}"-"${version}" "${module}"
+    ln -sf "${install_dir_prefix}"/"${module}"/bin/scws /usr/local/bin/scws
+}

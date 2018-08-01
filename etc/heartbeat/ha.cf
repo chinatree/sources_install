@@ -1,0 +1,15 @@
+debugfile /var/log/ha-debug
+logfile	/var/log/ha-log
+logfacility	local0
+keepalive 2
+deadtime 30
+warntime 10
+initdead 120
+hopfudge 1
+bcast eth0
+auto_failback on
+watchdog /dev/watchdog
+node	VM-X-93
+node	VM-X-94
+respawn hacluster /usr/lib64/heartbeat/ipfail
+#debug 1

@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# Compile php ext of imagick function
+compile_php_ext_imagick()
+{
+    local action=${1:-None}
+    # compile depend lib
+    if [ "${action}" = "auto" ];
+    then
+        compile_ImageMagick 'auto_config'
+    elif [ "${action}" = "interact" ]
+    then
+        interact_choice "install ImageMagick for imagick(php_ext)?" 'compile_ImageMagick auto_config'
+    fi
+
+    clean_tmp
+
+    local module="imagick"
+    local version="${php_ext_imagick_version}"
+    local logfile=""${install_log_dir}"/php_ext_"${module}".log"
+    cp -a "${php_exts_dir}"/"${module}"-"${version}".tgz "${tmp_dir}"
+    cd "${tmp_dir}"
+
+    tar xf "${module}"-"${version}".tgz
+    cd "${module}"-"${version}"
+    echo -n "Compile `get_color "${module}"-"${version}" CYANBLUE` for php extension ... "
+    ${install_dir_prefix}/php/bin/phpize > "${logfile}" 2>&1
+    ./configure --prefix="${install_dir_prefix}"/"${module}"-"${version}" --with-imagick="${install_dir_prefix}"/ImageMagick-"${ImageMagick_version}" >> "${logfile}" 2>&1
+    make >> "${logfile}" 2>&1
+    make install >> "${logfile}" 2>&1
+    get_exit_code $? 0
+
+    clean_tmp
+}

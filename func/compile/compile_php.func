@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# Compile services php function
+compile_php()
+{
+    local config_action="${1:-None}"
+    clean_tmp
+
+    local module="php"
+    local version="${php_version}"
+    local packet_file="${packets_dir}/${module}-${version}.tar.gz"
+    local logfile="${install_log_dir}/${module}.log"
+    if [ ! -f "${packet_file}" ];
+    then
+        echo -n "The file `get_color "${packet_file}" UNDERLINE` not exists ... "
+        get_exit_code 1 0
+        return
+    fi
+    cp -a "${packet_file}" "${tmp_dir}"
+    cd "${tmp_dir}"
+
+    tar xf "${packet_file}"
+    cd "${module}-${version}"
+    echo -n "Compile `get_color "${module}-${version}" CYANBLUE` to `get_color "${install_dir_prefix}" UNDERLINE` ... "
+    if [ "${version%.*}" == '5.3' ] || [ "${version%.*}" == '5.4' ];
+    then
+        ./configure --prefix="${install_dir_prefix}/${module}-${version}" --with-config-file-path="${install_dir_prefix}/${module}-${version}/etc" --with-config-file-scan-dir="${install_dir_prefix}/${module}-${version}/etc/extends" --with-curl="${install_libs_dir_prefix}/curl-${libs_curl_version}" --with-iconv="${install_libs_dir_prefix}/libiconv-${libs_libiconv_version}" --with-libxml-dir="${install_libs_dir_prefix}/libxml2-${libs_libxml2_version}" --with-mcrypt="${install_libs_dir_prefix}/libmcrypt-${libs_libmcrypt_version}" --with-gd --enable-gd-native-ttf --with-jpeg-dir="${install_libs_dir_prefix}/jpeg-${libs_jpeg_version}" --with-png-dir="${install_libs_dir_prefix}/libpng-${libs_libpng_version}" --with-freetype-dir="${install_libs_dir_prefix}/freetype-${libs_freetype_version}" --with-zlib-dir="${install_libs_dir_prefix}/zlib-${libs_zlib_version}" --with-mhash --enable-mbstring --enable-mysqlnd --with-mysql=mysqlnd --with-mysqli=mysqlnd --with-pdo-mysql=mysqlnd --enable-bcmath --with-gettext --with-openssl --enable-calendar --enable-ctype --enable-fpm --enable-pcntl --enable-shmop --enable-soap --enable-sockets --enable-sysvmsg --enable-sysvsem --enable-sysvshm --enable-wddx > "${logfile}" 2>&1
+    elif [ "${version%.*}" == '5.5' ] || [ "${version%.*}" == '5.6' ] || [ "${version%.*}" == '7.0' ];
+    then
+        ./configure --prefix="${install_dir_prefix}/${module}-${version}" --with-config-file-path="${install_dir_prefix}/${module}-${version}/etc" --with-config-file-scan-dir="${install_dir_prefix}/${module}-${version}/etc/extends" --with-curl="${install_libs_dir_prefix}/curl-${libs_curl_version}" --with-iconv="${install_libs_dir_prefix}/libiconv-${libs_libiconv_version}" --with-libxml-dir="${install_libs_dir_prefix}/libxml2-${libs_libxml2_version}" --with-mcrypt="${install_libs_dir_prefix}/libmcrypt-${libs_libmcrypt_version}" --with-gd --enable-gd-native-ttf --with-jpeg-dir="${install_libs_dir_prefix}/jpeg-${libs_jpeg_version}" --with-png-dir="${install_libs_dir_prefix}/libpng-${libs_libpng_version}" --with-freetype-dir="${install_libs_dir_prefix}/freetype-${libs_freetype_version}" --with-zlib-dir="${install_libs_dir_prefix}/zlib-${libs_zlib_version}" --with-mhash --enable-mbstring --enable-mysqlnd --with-mysql=mysqlnd --with-mysqli=mysqlnd --with-pdo-mysql=mysqlnd --enable-bcmath --with-gettext --with-openssl --enable-calendar --enable-ctype --enable-fpm --enable-pcntl --enable-shmop --enable-soap --enable-sockets --enable-sysvmsg --enable-sysvsem --enable-sysvshm --enable-wddx --enable-opcache > "${logfile}" 2>&1
+    fi
+    make >> "${logfile}" 2>&1
+    make install >> "${logfile}" 2>&1
+    get_exit_code $? 1
+
+    # configuration
+    if [ "${config_action}" = "auto_config" ];
+    then
+        "${AUTO_CONFIG_SH}" -t "${module}"
+    fi
+
+    clean_tmp
+}

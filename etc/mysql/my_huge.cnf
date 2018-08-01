@@ -1,0 +1,66 @@
+[client]
+port            = 3306
+socket          = /usr/local/services/mysql/var/mysql.sock
+ 
+[mysqld]
+#datadir = /data/mysql/data/
+datadir = /usr/local/services/mysql/var/
+port            = 3306
+socket          = /usr/local/services/mysql/var/mysql.sock
+skip-external-locking
+key_buffer_size = 384M
+max_allowed_packet = 1M
+table_open_cache = 512
+sort_buffer_size = 2M
+read_buffer_size = 2M
+read_rnd_buffer_size = 8M
+myisam_sort_buffer_size = 64M
+thread_cache_size = 8
+query_cache_size = 32M
+thread_concurrency = 8
+bind-address = 127.0.0.1
+character-set-server = utf8
+max_connections = 1024
+max_user_connections = 1024
+max_connect_errors = 10000
+#sql_mode="STRICT_ALL_TABLES,NO_AUTO_CREATE_USER"
+skip-name-resolve
+log_slow_queries
+slow_query_log_file=/usr/local/services/mysql/var/mysql-slow.log
+long_query_time = 5
+log_long_format
+log-error=/usr/local/services/mysql/var/mysql.err
+ 
+log-bin = /data/mysql/binlog/mysql-bin
+expire_logs_days = 4
+ 
+server-id       = 1
+ignore-builtin-innodb
+plugin-load=innodb=ha_innodb_plugin.so
+default-storage-engine=innodb 
+innodb_data_home_dir = /usr/local/services/mysql/var
+innodb_data_file_path = ibdata1:4000M;ibdata2:4000M;ibdata3:10M:autoextend
+innodb_log_group_home_dir = /usr/local/services/mysql/var
+innodb_buffer_pool_size = 1024M
+innodb_additional_mem_pool_size = 10M
+innodb_log_file_size = 256M
+innodb_log_buffer_size = 8M
+innodb_flush_log_at_trx_commit = 1
+innodb_lock_wait_timeout = 50
+ 
+[mysqldump]
+quick
+max_allowed_packet = 16M
+ 
+[mysql]
+default-character-set = utf8
+no-auto-rehash
+ 
+[myisamchk]
+key_buffer_size = 256M
+sort_buffer_size = 256M
+read_buffer = 2M
+write_buffer = 2M
+
+[mysqlhotcopy]
+interactive-timeout

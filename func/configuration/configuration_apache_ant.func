@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# Configuration services of ant function
+configuration_apache_ant()
+{
+    local module="ant"
+    local version="${apache_ant_version}"
+    local logfile="${install_log_dir}/${module}.log"
+    local profile_file="/etc/profile"
+
+    [ ! -h "${install_dir_prefix}/${module}" ] && cd "${install_dir_prefix}" && ln -sf "${module}-${version}" "${module}"
+
+    local added_flag=$(less "${profile_file}" | grep '# Set Apache Ant Environment Variable' | wc -l)
+    if test "${added_flag}" -eq 0
+    then
+        cat <<EOF >> "${profile_file}"
+
+# Set Apache Ant Environment Variable
+APACHE_ANT_HOME="${install_dir_prefix}/${module}"
+export PATH=\$PATH:\$APACHE_ANT_HOME/bin
+EOF
+    fi
+
+    source "${profile_file}"
+}

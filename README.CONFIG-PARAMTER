@@ -1,0 +1,332 @@
+gcc gcc-c++
+autoconf
+nss_ldap 
+libjpeg libjpeg-devel
+libpng libpng-devel
+freetype freetype-devel
+libxml2 libxml2-devel
+zlib zlib-devel
+glibc glibc-devel
+glib2 glib2-devel
+bzip2 bzip2-devel
+ncurses ncurses-devel
+curl curl-devel
+e2fsprogs e2fsprogs-devel
+krb5 krb5-devel
+libidn libidn-devel
+openssl openssl-devel
+openldap openldap-devel
+libc-client libc-client-devel 
+openldap-clients openldap-servers
+
+
+
+
+【 Ubuntu 】
+aptitude update
+apt-get install vim ntp gcc g++ make autoconf rsync wget man-db lsof openssl telnet traceroute parted iptables lvm2 curl strace
+
+# For Nginx
+apt-get install libssl-dev
+
+# For MySQL
+apt-get install libncurses-dev
+
+# For PHP
+apt-get install libcurl4-openssl-dev
+
+# For uuid of php_ext
+apt-get install uuid-dev
+
+# For gearman of php_ext
+apt-get install libboost-all-dev gperf libevent-dev
+
+# For mmseg
+apt-get install libtool
+
+# For coreseek
+# coreseek 在 GCC >= 4.7 时，需要打补丁
+yum -y install libexpat1-dev
+
+# For lua
+apt-get install libreadline-dev
+
+# For rrdtool
+apt-get install libcairo2-dev
+
+# For rabbitmq
+apt-get install xsltproc
+
+
+
+【 SUSE 】 
+# For rrdtool
+zypper install cairo-devel
+
+【 CentOS 】 实测过：6.2 x64+
+# Global
+yum -y install vim ntp gcc gcc-c++ make automake autoconf rsync wget man lsof openssl openssl-devel telnet traceroute bind-utils openssh-clients parted iptables lvm2 curl strace patch unzip
+
+# For MySQL
+yum -y install ncurses-devel
+
+# For PHP
+yum -y install flex bison
+
+# For Gearmand
+yum -y install gperf boost-devel libevent-devel
+
+# For uuid of php_ext
+yum -y install libuuid-devel
+
+# For mmseg
+yum -y install libtool
+
+# For coreseek
+yum -y install expat-devel
+
+# For monitor
+yum -y install nc
+
+# For net-snmp
+sudo apt-get install libperl-dev
+
+# For openswan
+yum -y install gmp-devel
+
+# For rrdtool
+yum -y install cairo-devel
+
+# For Heartbeat
+yum -y install libtool-ltdl-devel bzip2-devel glib2-devel libxml2-devel libxslt-devel
+
+
+export JAVA_HOME=/usr/local/services/jdk1.7.0_25
+export PATH=$JAVA_HOME/bin:$PATH
+export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+
+apt-cache search uuid
+
+MySQL编译参数:
+ --enable-assembler --with-mysqld-ldflags=-all-static '--with-client-ldflags=-all-static -ltinfo' --without-debug --enable-thread-safe-client --with-big-tables --enable-local-infile --enable-shared --with-charset=utf8 --with-extra-charsets=gbk,gb2312,big5,latin1 --with-plugins=innobase,myisam,ndbcluster,csv,partition
+
+HTTPD编译参数：
+./configure --prefix=/usr/local/apache --with-included-apr --enable-so --enable-deflate=shared --enable-expires=shared --enable-ssl=shared --enable-headers=shared --enable-rewrite=shared --enable-static-support --with-mpm=prefork
+
+Apache编译参数注解
+./configure   //配置源代码树
+--with-included-apr : 在编译时强制使用当前源代码中绑定的APR版本
+--prefix=/usr/local/apache   //体系无关文件的顶级安装目录PREFIX ，也就Apache的安装目录。
+--enable-module=so   //打开 so 模块，so 模块是用来提 DSO 支持的 apache 核心模块
+--enable-so : 允许运行时加载DSO模块（注意：so模块需静态(static)编译）
+--enable-deflate=shared   //支持网页压缩
+--enable-expires=shared   //支持 HTTP 控制
+--enable-rewrite=shared   //支持 URL 重写
+--enable-headers=shared : 将headers模块编译为DSO
+--enable-ssl=shared : 将ssl模块编译为DSO
+--enable-cache  //支持缓存
+--enable-file-cache  //支持文件缓存
+--enable-mem-cache  //支持记忆缓存
+--enable-disk-cache  //支持磁盘缓存
+--enable-static-support   //支持静态连接(默认为动态连接)
+--enable-static-htpasswd   //使用静态连接编译 htpasswd - 管理用于基本认证的用户文件
+--enable-static-htdigest   //使用静态连接编译 htdigest - 管理用于摘要认证的用户文件
+--enable-static-rotatelogs   //使用静态连接编译 rotatelogs - 滚动 Apache 日志的管道日志程序
+--enable-static-logresolve   //使用静态连接编译 logresolve - 解析 Apache 日志中的IP地址为主机名
+--enable-static-htdbm   //使用静态连接编译 htdbm - 操作 DBM 密码数据库
+--enable-static-ab   //使用静态连接编译 ab - Apache HTTP 服务器性能测试工具
+--enable-static-checkgid   //使用静态连接编译 checkgid
+--disable-cgid   //禁止用一个外部 CGI 守护进程执行CGI脚本
+--disable-cgi   //禁止编译 CGI 版本的 PHP
+--disable-userdir   //禁止用户从自己的主目录中提供页面
+--with-mpm=worker // 让apache以worker方式运行
+--enable-rewrite //让apache支持伪静态规则
+--enable-deflate //开启gzip压缩
+--enable-authn-dbm=shared // 对动态数据库进行操作。Rewrite时需要
+--enable-mods-shared=all 做大化编译
+
+
+
+/**
+ * PHP编译参数
+ */
+--with-config-file-path=<php_install_dir>/etc
+--with-curl="${install_libs_dir_prefix}"/curl-"${curl_version}"/
+--with-libxml-dir="${install_libs_dir_prefix}"/libxml2-"${libxml2_version}"/
+--with-mcrypt="${install_libs_dir_prefix}"/libmcrypt-"${libmcrypt_version}"/
+--with-mysql="${install_dir_prefix}"/mysql-"${mysql_version}"/
+--with-mysqli="${install_dir_prefix}"/mysql-"${mysql_version}"/bin/mysql_config
+--enable-mbstring
+多字节，字符串的支持
+
+- 数据库
+- 参照 URL： http://cn2.php.net/manual/en/mysqlnd.install.php
+- MySQL
+--enable-mysqlnd                启用内置的 MySQL Native Driver ，同时支持mysql 、 mysqli 和 PDO_MYSQL
+--with-pdo-mysql=mysqlnd
+--with-mysql=mysqlnd \
+--with-mysqli=mysqlnd \
+--with-pdo-mysql=mysqlnd \
+[other options]
+- 参照 URL： http://cn2.php.net/manual/en/mysqlnd.install.php
+- libmysqlclient 和 mysqld 选择：http://php.net/manual/en/mysqlinfo.library.choosing.php
+- Mysqlnd
+
+
+- GD库支持
+- 参照 URL： http://cn2.php.net/manual/en/image.installation.php
+--with-gd                 启用 GD 库支持
+--enable-gd-native-ttf    支持 TrueType for gd
+--with-jpeg-dir=<DIR>     支持 jpg for gd
+--with-png-dir=<DIR>      支持 png for gd
+
+
+--with-zlib                           # 支持读和写压缩
+http://www.php.net/manual/zh/book.zlib.php
+--enable-bcmath              #用字符串表示的任意大小和精度的数字的二进制计算
+http://www.php.net/manual/zh/book.bc.php
+
+打开图片大小调整
+
+--with-openssl
+--enable-ctype
+--enable-fpm
+启用 fpm 模式
+
+--enable-pcntl
+打开多进程库支持(CLI/CGI only)
+
+--enable-shmop
+
+--enable-soap
+打开 soap 支持，实现 web service，默认集成在PHP源码包里
+
+--enable-sockets
+打开 sockets 支持，默认集成在PHP源码包里
+
+--enable-sysvmsg
+--enable-sysvsem
+--enable-sysvshm
+
+
+/**
+ * MySQL 配置变化：
+ */
+- 5.5.40+ 废弃 thread_concurrency
+
+
+/**
+ * 其他
+ */
+
+PHP特殊扩展：
+scws  简易中文分词系统
+https://github.com/hightman/scws
+
+
+
+Memcache编译参数：
+
+
+Redis编译参数：
+
+
+coreseek搜索：
+gcc 4.7安装会有BUG，需要打补丁。
+/usr/local/services/mmseg-3.2.14/bin/mmseg -d /usr/local/services/mmseg-3.2.14/etc/ src/t1.txt
+/usr/local/services/coreseek-3.2.14/bin/indexer -c /usr/local/services/coreseek-3.2.14/etc/sphinx-min.conf.dist
+
+
+
+PHP加速：
+APC           已集成到 php 的 pecl
+eAccelerator  未集成到 php 的 pecl    http://eaccelerator.net/ 
+XCache        未集成到 php 的 pecl    http://xcache.lighttpd.net/
+参考：
+http://www.laogui.com/Zend-Opcache
+http://www.vpser.net/opt/apc-eaccelerator-xcache.html
+
+chkconfig --level 12345 netfs off
+chkconfig --level 12345 sendmail off
+chkconfig --level 12345 postfix off
+yum -y remove auditd iptables-ipv6 iscsi-initiator-utils mdadm
+sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
+
+CentOS5.5 默认基本服务详解
+
+服务名称	功能	默认	建议	备注
+NetworkManager	用于自动连接网络	关闭	关闭	对服务器没用
+acpid	电源的开关等检测管理	开启	关闭	对服务器没用
+anacron	一种计划任务管理	开启	开启	 
+apmd	高级电源管理	开启	开启	 
+atd	在指定时间执行命令	开启	关闭	如果用crond，则可关闭它
+auditd	 	开启	自定	如果用selinux，需要开启它
+autofs	文件系统自动加载、卸载	开启	自定	只在需要时开启它，可以停止
+avahi-daemon	本地网络服务查找	开启	关闭	对服务器没用
+avahi-dnsconfd	avahi DNS	关闭	关闭	对服务器没用
+bluetooth	蓝牙无线通信	开启	关闭	对服务器没用
+conman	控制台管理	关闭	关闭	没用
+spuspeed	调节cpu速度	开启	自定	 
+crond	计划任务管理	开启	开启	很有用，开启
+cups	通用unix打印服务	开启	关闭	对服务器没用
+dnsmasq	dns cache	关闭	关闭	没用
+dund	蓝牙相关	关闭	关闭	 
+firstboot	系统安装后初始设定	开启	关闭	 
+gpm	控制台下的鼠标支持	开启	开启	 
+haldaemon	硬件信息收集服务	开启	开启	 
+hidd	蓝牙相关	开启	关闭	 
+ibmasm	ibm硬件管理	关闭	关闭	 
+ip6tables	ipv6防火墙	开启	关闭	 
+iptables	ipv4防火墙	开启	关闭	 
+irda	红外线通信	关闭	关闭	 
+irqbalance	cpu负载均衡	开启	自定	多核cup需要
+kudzu	硬件变动检测	开启	关闭	服务器无用
+lvm2-monitor	lvm监视	开启	关闭	非集群无用
+mcstrans	在开启selinux时用于检查context	开启	关闭	 
+mdmonitor	软raid监视	开启	关闭	 
+mdmpd	软raid管理	关闭	关闭	 
+messagebus	负责在各个系统进程之间传递消息	开启	开启	如停用，haldaemon启动会失败
+microcode_ctl	 cpu微码管理升级	开启	关闭	 
+multipathd	 	关闭	关闭	 
+netconsole	 	关闭	关闭	 
+netfs	nfs相关	开启	关闭	 
+netplugd	网线热插拔监视	关闭	关闭	 
+network	 	开启	开启	 
+nfs	网络文件系统	关闭	关闭	 
+nfslock	nfs相关	开启	关闭	 
+nscd	name cache，应该与DNS相关	关闭	关闭	 
+oddjobd	与D-BUS相关	关闭	关闭	 
+pand	蓝牙相关	关闭	关闭	 
+pcscd	pc/sc smart card daemon	开启	关闭	 
+portmap	使用NFS、NIS时的port map	开启	关闭	 
+psacct	负荷检测	关闭	关闭	 
+rawdevices	raw 设备支持	开启	开启	 
+rdisc	自动检测路由器	关闭	关闭	 
+readahead_early	 	开启	开启	 
+readahead_later	 	关闭	关闭	 
+restorecond	selinux相关	关闭	关闭	 
+rpcgssd	NFS相关	开启	关闭	 
+rpcidmapd	RPC name to UID/GID mapper	开启	关闭	NFS相关
+rpcsvcgssd	NFS相关	关闭	关闭	 
+saslauthd	sasl认证服务相关	关闭	关闭	 
+sendmail	 	开启	关闭	 
+smartd	硬盘自动检测守护进程	开启	开启	 
+sshd	 	开启	开启	 
+syslog	系统日志进程	开启	开启	 
+tcsd	 	关闭	关闭	 
+wpa_supplicant	无线认证相关	关闭	关闭	 
+xfs	x windows相关	开启	关闭	 
+ypbind	network information service客户端	关闭	关闭	 
+yum-updatesd	yum自动升级	开启	关闭	对服务器开启比较危险哦
+注：上述服务列表是在CentOS只安装了基本系统、开发工具、开发库、老软件支持的前提下显示出来的
+
+udev-post  实现即插即用功能 开启  开启
+
+
+./configure --prefix=/usr/local/services/net-snmp-5.7.2.1 --with-default-snmp-version="3" --with-logfile="/usr/local/services/net-snmp-5.7.2.1/log/snmpd.log" --with-persistent-directory="/usr/local/services/net-snmp-5.7.2.1/var/net-snmp" --enable-mfd-rewrites --enable-embedded-perl --with-perl-modules --with-sys-contact="chinatree.lu@gmail.com" --with-sys-location="China" 
+
+安装 Zabbix ：
+./configure --prefix=/usr/local/services/zabbix-2.2.3 --enable-server --enable-agent --with-mysql=/usr/local/services/mysql/bin/mysql_config --with-net-snmp --with-libcurl
+
+# varnish
+http://ixdba.blog.51cto.com/2895551/682555

@@ -1,0 +1,90 @@
+#!/bin/bash
+# author   : chinatree <chinatree2012@gmail.com>
+# date     : 2013-02-20
+#chkconfig:345 62 62
+#description:mongod server
+
+RETVAL=0
+prog="mongo"
+
+# [global]
+SCRIPT_PATH=$(cd "$(dirname "$0")"; pwd)
+SCRIPT_NAME=$(basename "$0")
+MONGO_BIN="/usr/local/bin/mongod"
+MONGO_CONF="--config=/home/test/mongo/mongo.conf"
+MONGO_DATA="--dbpath=/home/test/mongo/data/"
+MONGO_PID="/home/test/mongo/log/mongo.pid"
+
+get_color()
+{
+    case "$2" in
+    RED)
+        echo -ne "\033[31m"$1"\033[0m"
+        ;;
+
+    GREEN)
+        echo -ne "\033[32m"$1"\033[0m"
+        ;;
+
+    *)
+        echo -ne "$1"
+        ;;
+    esac
+}
+
+get_exit_code()
+{
+    if [ "$?" -ne 0 ];then
+        echo "[`get_color " FAILED " RED`]"
+        exit "$1"
+    else
+        echo "[`get_color "   OK   " GREEN`]"
+    fi
+}
+
+start () {
+    echo -n "Starting up ${prog}: "
+    ${MONGO_BIN} ${MONGO_CONF} > /dev/null
+    RETVAL=$?    
+    get_exit_code ${RETVAL}
+    return ${RETVAL} 
+}
+
+stop () {
+    echo -n "Shutting down ${prog}: "
+    ${MONGO_BIN} ${MONGO_DATA} --shutdown > /dev/null
+    RETVAL=$?
+    get_exit_code ${RETVAL}
+    return ${RETVAL}
+}
+
+usage () {
+    echo -e "`get_color "Usage:" CYANBLUE` \
+    \n    ./"${SCRIPT_NAME}" {start|stop|restart}"
+    exit 2
+}
+
+case "$1" in
+start)
+    start
+    RETVAL=$?
+    ;;
+
+stop)
+    stop
+    RETVAL=$?
+    ;;
+
+restart)
+    stop
+    sleep 1s
+    start
+    RETVAL=$?
+    ;;
+
+*)
+    usage
+    ;;
+esac
+
+exit ${RETVAL}

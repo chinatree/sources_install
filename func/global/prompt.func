@@ -1,0 +1,12 @@
+#!/bin/bash
+
+prompt()
+{
+    get_color "${1}(Y/N): " PEACH
+    read yesno
+    if [ "${yesno}" == "Y" ] || [ "${yesno}" == "y" ]; then
+        return 1
+    else
+        return 0
+    fi
+}

@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Configuration services swig function
+configuration_swig()
+{
+    local module="swig"
+    local version="${swig_version}"
+
+    [ ! -h "${install_dir_prefix}/${module}" ] && cd "${install_dir_prefix}" && ln -sf "${module}"-"${version}" "${module}"
+    ln -sf "${install_dir_prefix}"/"${module}"/bin/swig "${path_local_bin}"/swig
+}

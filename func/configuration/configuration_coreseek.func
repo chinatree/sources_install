@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Configuration services coreseek function
+configuration_coreseek()
+{
+    local module="coreseek"
+    local version="${coreseek_version}"
+
+    [ ! -h "${install_dir_prefix}/${module}" ] && cd "${install_dir_prefix}" && ln -sf "${module}"-"${version}" "${module}"
+    echo "/usr/local/services/mysql/lib/mysql" > /etc/ld.so.conf.d/mysql-x86_64.conf
+    ldconfig
+    ln -sf "${install_dir_prefix}"/"${module}"/bin/indexer /usr/local/bin/indexer
+}

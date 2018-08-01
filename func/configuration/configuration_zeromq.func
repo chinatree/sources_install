@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Configuration services zeromq function
+configuration_zeromq()
+{
+    local module="zeromq"
+    local version="${zeromq_version}"
+
+    [ ! -h "${install_dir_prefix}/${module}" ] && cd "${install_dir_prefix}" && ln -sf "${module}-${version}" "${module}"
+}

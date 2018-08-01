@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Configuration services cmake function
+configuration_cmake()
+{
+    local module="cmake"
+    local version="${cmake_version}"
+
+    [ ! -h "${install_dir_prefix}/${module}" ] && cd "${install_dir_prefix}" && ln -sf "${module}-${version}" "${module}"
+    ln -sf "${install_dir_prefix}/${module}/bin/cmake" "/usr/local/bin/cmake"
+}

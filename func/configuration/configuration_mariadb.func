@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# Configuration services of mariadb function
+configuration_mariadb()
+{
+    local module="mariadb"
+    local version="${mariadb_version}"
+    local logfile="${install_log_dir}/${module}.log"
+    local user="${module}"
+    local group="dba"
+
+    [ ! -h "${install_dir_prefix}/${module}" ] && cd "${install_dir_prefix}" && ln -sf "${module}-${version}" "${module}"
+    ln -sf "${install_dir_prefix}/${module}"/bin/mysql "${path_local_bin}"/mysql
+    ln -sf "${install_dir_prefix}/${module}"/bin/mysqldump "${path_local_bin}"/mysqldump
+    ln -sf "${install_dir_prefix}/${module}"/bin/mysqlhotcopy "${path_local_bin}"/mysqlhotcopy
+    ln -sf "${install_dir_prefix}/${module}"/bin/mysqladmin "${path_local_bin}"/mysqladmin
+    ln -sf "${install_dir_prefix}/${module}"/bin/mysqlbinlog "${path_local_bin}"/mysqlbinlog
+
+    mkdir -p "${mysql_data_dir}"/{data,binlog,relaylog,redolog,logs}
+    chk_not_exists_user "${module}"
+    if [ $? -eq 1 ];
+    then
+        groupadd -r "${group}" 
+        useradd -r -s /sbin/nologin -g "${group}" "${user}"
+    fi
+    chown -R "${user}"."${group}" "${mysql_data_dir}"
+    [ ! -h "${install_dir_prefix}/${module}/var" ] && ln -sf "${mysql_data_dir}" "${install_dir_prefix}/${module}"/var
+
+    "${install_dir_prefix}/${module}"/bin/mysql_install_db --basedir="${install_dir_prefix}/${module}" --datadir="${install_dir_prefix}/${module}/var/data" --user="${user}" >> "${logfile}" 2>&1
+    chown -R root.root "${install_dir_prefix}/${module}"/*
+    chown -R "${user}"."${group}" "${install_dir_prefix}/${module}"/var
+    [ -f "${etc_dir}/my-${version%.*}.cnf" ] && cp -a "${etc_dir}/my-${version%.*}".cnf /etc/my.cnf
+    cp -a "${install_dir_prefix}/${module}-${version}"/mysql.server /etc/init.d/mysql
+    chmod 755 /etc/init.d/mysql
+}

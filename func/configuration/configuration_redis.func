@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Configuration services redis function
+configuration_redis()
+{
+    local module="redis"
+    local version="${redis_version}"
+
+    [ ! -h "${install_dir_prefix}/${module}" ] && cd "${install_dir_prefix}" && ln -sf "${module}-${version}" "${module}"
+    ln -sf "${install_dir_prefix}/${module}/bin/redis-server" "${path_local_bin}"
+    ln -sf "${install_dir_prefix}/${module}/bin/redis-cli" "${path_local_bin}"
+}
