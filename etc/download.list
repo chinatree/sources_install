@@ -1,12 +1,12 @@
 #[taxonomy]|module|download url|version|save relative paths
-##[Servers]|nginx|http://nginx.org/download/nginx-1.14.0.tar.gz|1.14.0|packets
+#[Servers]|nginx|http://nginx.org/download/nginx-1.14.0.tar.gz|1.14.0|packets
 #[Servers]|mysql|https://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-5.7.21.tar.gz|5.7.21|packets
 #[Servers]|mariadb|http://mirrors.ustc.edu.cn/mariadb/mariadb-5.5.41/source/mariadb-5.5.41.tar.gz|5.5.41|packets
 #[Servers]|php|http://cn2.php.net/distributions/php-7.1.3.tar.gz|7.1.3|packets
 #[Servers]|memcached|http://www.memcached.org/files/memcached-1.4.24.tar.gz|1.4.24|packets
 #[Servers]|node|https://nodejs.org/dist/v6.10.0/node-v6.10.0.tar.gz|v6.10.0|packets
 #[Servers]|ImageMagick|http://www.imagemagick.org/download/ImageMagick-6.9.0-0.tar.bz2|6.9.0-0|packets
-#[Servers]|redis|http://download.redis.io/releases/redis-2.8.9.tar.gz|v2.8.9|packets
+#[Servers]|redis|http://download.redis.io/releases/redis-4.0.10.tar.gz|v4.0.10|packets
 #[Servers]|mongodb|http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-2.6.1.tgz|linux-x86_64-2.6.1|packets
 #[Servers]|uuid|ftp://ftp.ossp.org/pkg/lib/uuid/uuid-1.6.2.tar.gz|1.6.2|packets
 #[Servers]|scws|http://www.xunsearch.com/scws/down/scws-1.2.2.tar.bz2|1.2.2|packets
