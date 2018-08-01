@@ -23,14 +23,14 @@ compile_nginx()
     tar xf pcre-"${libs_pcre_version}".tar.bz2
     cd "${module}"-"${version}"
     echo -n "Compile `get_color "${module}"-"${version}" CYANBLUE` to `get_color "${install_dir_prefix}" UNDERLINE` ... "
-    if [ "${version%.*}" == '1.6' ];
+    if [ "${version%.*}" == '1.12' ];
     then
-        ./configure --prefix="${install_dir_prefix}"/"${module}"-"${version}" --with-http_gzip_static_module --with-http_ssl_module --with-pcre="${tmp_dir}"/pcre-"${libs_pcre_version}" --with-http_realip_module --with-http_sub_module --with-http_stub_status_module --with-mail_ssl_module --without-http_scgi_module --without-http_uwsgi_module > "${logfile}" 2>&1
-    elif [ "${version%.*}" == '1.8' ];
+        ./configure --prefix="${install_dir_prefix}"/"${module}"-"${version}" --with-http_gzip_static_module --with-http_ssl_module --with-pcre="${tmp_dir}"/pcre-"${libs_pcre_version}" --with-http_realip_module --with-http_sub_module --with-http_stub_status_module --with-mail_ssl_module --with-threads --without-http_scgi_module > "${logfile}" 2>&1
+    elif [ "${version%.*}" == '1.14' ];
     then
-        ./configure --prefix="${install_dir_prefix}"/"${module}"-"${version}" --with-http_gzip_static_module --with-http_ssl_module --with-pcre="${tmp_dir}"/pcre-"${libs_pcre_version}" --with-http_realip_module --with-http_sub_module --with-http_stub_status_module --with-mail_ssl_module --with-threads --without-http_scgi_module --without-http_uwsgi_module > "${logfile}" 2>&1
+        ./configure --prefix="${install_dir_prefix}"/"${module}"-"${version}" --with-http_gzip_static_module --with-http_ssl_module --with-pcre="${tmp_dir}"/pcre-"${libs_pcre_version}" --with-http_realip_module --with-http_sub_module --with-http_stub_status_module --with-mail_ssl_module --with-threads --with-file-aio --without-http_scgi_module > "${logfile}" 2>&1
     else
-        ./configure --prefix="${install_dir_prefix}"/"${module}"-"${version}" --with-http_gzip_static_module --with-http_ssl_module --with-pcre="${tmp_dir}"/pcre-"${libs_pcre_version}" --with-http_realip_module --with-http_sub_module --with-http_stub_status_module --with-mail_ssl_module --without-http_scgi_module --without-http_uwsgi_module > "${logfile}" 2>&1
+        ./configure --prefix="${install_dir_prefix}"/"${module}"-"${version}" --with-http_gzip_static_module --with-http_ssl_module --with-pcre="${tmp_dir}"/pcre-"${libs_pcre_version}" --with-http_realip_module --with-http_sub_module --with-http_stub_status_module --with-mail_ssl_module --with-threads --with-file-aio --without-http_scgi_module > "${logfile}" 2>&1
     fi
     make >> "${logfile}" 2>&1
     make install >> "${logfile}" 2>&1
