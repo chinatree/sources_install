@@ -13,6 +13,9 @@ ImageMagick-6.9.0-0 > php-5.6.4
 
 
 
+[MySQL]
+mysql-5.7.x     libboost >= 1.59.0
+
 
 
 [LVS]
@@ -28,7 +31,7 @@ M2Crypto must specified pcre lib folder
 M2crypto require swig <= 3.0.4
 Active-SQLAlchemy 0.4.0 require SQLAlchemy = 0.9.8
 
-salt            2015.5.x        
+salt            2015.5.x
 salt            2015.8.x        Tornado, timelib, smmap, pygit2, python-gnupg, pycparser, dateutil
 
 
