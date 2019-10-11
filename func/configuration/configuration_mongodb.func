@@ -6,7 +6,7 @@ configuration_mongodb()
     local module="mongodb"
     local version="${mongodb_version}"
 
-    [ ! -h "${install_dir_prefix}/${module}" ] && cd "${install_dir_prefix}" && ln -sf "${module}"-"${version}" "${module}"
+    [ ! -h "${install_dir_prefix}/${module}" ] && cd "${install_dir_prefix}" && ln -sf "${module}-${version}" "${module}"
     test ! -d "${install_dir_prefix}/${module}-${version}/etc" && mkdir -p "${install_dir_prefix}/${module}-${version}/etc"
 
     ln -sf "${install_dir_prefix}"/"${module}"/bin/mongo "${path_local_bin}"

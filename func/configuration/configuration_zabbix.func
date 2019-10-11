@@ -6,7 +6,7 @@ configuration_zabbix()
     local module="zabbix"
     local version="${zabbix_version}"
 
-    [ ! -h "${install_dir_prefix}/${module}" ] && cd "${install_dir_prefix}" && ln -sf "${module}"-"${version}" "${module}"
+    [ ! -h "${install_dir_prefix}/${module}" ] && cd "${install_dir_prefix}" && ln -sf "${module}-${version}" "${module}"
     ln -sf "${install_dir_prefix}/${module}"/sbin/zabbix_server /usr/local/bin/zabbix_server
     ln -sf "${install_dir_prefix}/${module}"/sbin/zabbix_agentd /usr/local/bin/zabbix_agentd
 }

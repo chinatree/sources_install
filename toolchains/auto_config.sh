@@ -64,7 +64,7 @@ parse_arguments_while() {
                 ;;
             -H|--help)
                 usage
-                ;;      
+                ;;
             -D|--debug)
                 set -x
                 ;;
@@ -78,7 +78,9 @@ versions() {
     version_format "[Main]" " "
     version_format "cmake" "${cmake_version}"
     version_format "beanstalkd" "${beanstalkd_version}"
+    version_format "go" "${go_version}"
     version_format "nginx" "${nginx_version}"
+    version_format "openresty" "${openresty_version}"
     version_format "tengine" "${tengine_version}"
     version_format "mysql" "${mysql_version}"
     version_format "mariadb" "${mariadb_version}"
@@ -88,6 +90,7 @@ versions() {
     version_format "ImageMagick" "${ImageMagick_version}"
     version_format "redis" "${redis_version}"
     version_format "mongo" "${mongo_version}"
+    version_format "luarocks" "${luarocks_version}"
     version_format "uuid" "${uuid_version}"
     version_format "scws" "${scws_version}"
     version_format "node" "${node_version}"
@@ -99,7 +102,7 @@ versions() {
     version_format "[Libs]" " "
     version_format "libxml2" "${libs_libxml2_version}"
     version_format "db" "${libs_db_version}" 'Y'
-    
+
     version_format "[Python Extensions]" " " 'Y'
 }
 
@@ -111,7 +114,7 @@ chk_not_exists_user() {
     then
         return 1
     fi
-    return 0    
+    return 0
 }
 #------------------------------------------------ Global Functions ------------------------------------------------#
 
@@ -125,8 +128,10 @@ case "${DO_TYPE}" in
     interact)
         interact_choice "configuration cmake?" configuration_cmake
         interact_choice "configuration beanstalkd?" configuration_beanstalkd
-        
+        interact_choice "configuration go?" configuration_go
+
         interact_choice "configuration nginx?" configuration_nginx
+        interact_choice "configuration openresty?" configuration_openresty
         interact_choice "configuration mysql?" configuration_mysql
         interact_choice "configuration library libxml2?" configuration_libs_libxml2
         interact_choice "configuration ImageMagick?" configuration_ImageMagick
@@ -142,9 +147,7 @@ case "${DO_TYPE}" in
         interact_choice "configuration mmseg?" configuration_mmseg
         interact_choice "configuration coreseek?" configuration_coreseek
 
-        interact_choice "configuration FastDFS?" configuration_FastDFS
         interact_choice "configuration library (berkeley-db)db?" configuration_libs_db
-        interact_choice "configuration FastDHT?" configuration_FastDHT
 
         interact_choice "modify kernel argv?" optimize_kernel_argv
         ;;
@@ -160,8 +163,14 @@ case "${DO_TYPE}" in
     beanstalkd)
         configuration_beanstalkd
         ;;
+    go)
+        configuration_go
+        ;;
     nginx)
         configuration_nginx
+        ;;
+    openresty)
+        configuration_openresty
         ;;
     tengine)
         configuration_tengine
@@ -183,6 +192,9 @@ case "${DO_TYPE}" in
         ;;
     java|jdk)
         configuration_jdk
+        ;;
+    luarocks)
+        configuration_luarocks
         ;;
     hadoop)
         configuration_hadoop
@@ -229,9 +241,6 @@ case "${DO_TYPE}" in
     libs_libsodium)
         configuration_libs_libsodium
         ;;
-    phpext_FastDFS|phpext_fastdfs)
-        configuration_php_ext_FastDFS
-        ;;
     zeromq)
         configuration_zeromq
         ;;
@@ -252,9 +261,6 @@ case "${DO_TYPE}" in
         ;;
     ImageMagick)
         configuration_ImageMagick
-        ;;
-    FastDFS|fastdfs)
-        configuration_FastDFS
         ;;
     FastDHT|fastdht)
         configuration_FastDHT

@@ -1,6 +1,6 @@
 gcc gcc-c++
 autoconf
-nss_ldap 
+nss_ldap
 libjpeg libjpeg-devel
 libpng libpng-devel
 freetype freetype-devel
@@ -16,7 +16,7 @@ krb5 krb5-devel
 libidn libidn-devel
 openssl openssl-devel
 openldap openldap-devel
-libc-client libc-client-devel 
+libc-client libc-client-devel
 openldap-clients openldap-servers
 
 
@@ -48,6 +48,9 @@ apt-get install libtool
 # coreseek 在 GCC >= 4.7 时，需要打补丁
 yum -y install libexpat1-dev
 
+# For luarocks
+apt-get install -y build-essential libreadline-dev
+
 # For lua
 apt-get install libreadline-dev
 
@@ -59,7 +62,7 @@ apt-get install xsltproc
 
 
 
-【 SUSE 】 
+【 SUSE 】
 # For rrdtool
 zypper install cairo-devel
 
@@ -240,7 +243,7 @@ gcc 4.7安装会有BUG，需要打补丁。
 
 PHP加速：
 APC           已集成到 php 的 pecl
-eAccelerator  未集成到 php 的 pecl    http://eaccelerator.net/ 
+eAccelerator  未集成到 php 的 pecl    http://eaccelerator.net/
 XCache        未集成到 php 的 pecl    http://xcache.lighttpd.net/
 参考：
 http://www.laogui.com/Zend-Opcache
@@ -257,8 +260,8 @@ CentOS5.5 默认基本服务详解
 服务名称	功能	默认	建议	备注
 NetworkManager	用于自动连接网络	关闭	关闭	对服务器没用
 acpid	电源的开关等检测管理	开启	关闭	对服务器没用
-anacron	一种计划任务管理	开启	开启	 
-apmd	高级电源管理	开启	开启	 
+anacron	一种计划任务管理	开启	开启
+apmd	高级电源管理	开启	开启
 atd	在指定时间执行命令	开启	关闭	如果用crond，则可关闭它
 auditd	 	开启	自定	如果用selinux，需要开启它
 autofs	文件系统自动加载、卸载	开启	自定	只在需要时开启它，可以停止
@@ -266,64 +269,64 @@ avahi-daemon	本地网络服务查找	开启	关闭	对服务器没用
 avahi-dnsconfd	avahi DNS	关闭	关闭	对服务器没用
 bluetooth	蓝牙无线通信	开启	关闭	对服务器没用
 conman	控制台管理	关闭	关闭	没用
-spuspeed	调节cpu速度	开启	自定	 
+spuspeed	调节cpu速度	开启	自定
 crond	计划任务管理	开启	开启	很有用，开启
 cups	通用unix打印服务	开启	关闭	对服务器没用
 dnsmasq	dns cache	关闭	关闭	没用
-dund	蓝牙相关	关闭	关闭	 
-firstboot	系统安装后初始设定	开启	关闭	 
-gpm	控制台下的鼠标支持	开启	开启	 
-haldaemon	硬件信息收集服务	开启	开启	 
-hidd	蓝牙相关	开启	关闭	 
-ibmasm	ibm硬件管理	关闭	关闭	 
-ip6tables	ipv6防火墙	开启	关闭	 
-iptables	ipv4防火墙	开启	关闭	 
-irda	红外线通信	关闭	关闭	 
+dund	蓝牙相关	关闭	关闭
+firstboot	系统安装后初始设定	开启	关闭
+gpm	控制台下的鼠标支持	开启	开启
+haldaemon	硬件信息收集服务	开启	开启
+hidd	蓝牙相关	开启	关闭
+ibmasm	ibm硬件管理	关闭	关闭
+ip6tables	ipv6防火墙	开启	关闭
+iptables	ipv4防火墙	开启	关闭
+irda	红外线通信	关闭	关闭
 irqbalance	cpu负载均衡	开启	自定	多核cup需要
 kudzu	硬件变动检测	开启	关闭	服务器无用
 lvm2-monitor	lvm监视	开启	关闭	非集群无用
-mcstrans	在开启selinux时用于检查context	开启	关闭	 
-mdmonitor	软raid监视	开启	关闭	 
-mdmpd	软raid管理	关闭	关闭	 
+mcstrans	在开启selinux时用于检查context	开启	关闭
+mdmonitor	软raid监视	开启	关闭
+mdmpd	软raid管理	关闭	关闭
 messagebus	负责在各个系统进程之间传递消息	开启	开启	如停用，haldaemon启动会失败
-microcode_ctl	 cpu微码管理升级	开启	关闭	 
-multipathd	 	关闭	关闭	 
-netconsole	 	关闭	关闭	 
-netfs	nfs相关	开启	关闭	 
-netplugd	网线热插拔监视	关闭	关闭	 
-network	 	开启	开启	 
-nfs	网络文件系统	关闭	关闭	 
-nfslock	nfs相关	开启	关闭	 
-nscd	name cache，应该与DNS相关	关闭	关闭	 
-oddjobd	与D-BUS相关	关闭	关闭	 
-pand	蓝牙相关	关闭	关闭	 
-pcscd	pc/sc smart card daemon	开启	关闭	 
-portmap	使用NFS、NIS时的port map	开启	关闭	 
-psacct	负荷检测	关闭	关闭	 
-rawdevices	raw 设备支持	开启	开启	 
-rdisc	自动检测路由器	关闭	关闭	 
-readahead_early	 	开启	开启	 
-readahead_later	 	关闭	关闭	 
-restorecond	selinux相关	关闭	关闭	 
-rpcgssd	NFS相关	开启	关闭	 
+microcode_ctl	 cpu微码管理升级	开启	关闭
+multipathd	 	关闭	关闭
+netconsole	 	关闭	关闭
+netfs	nfs相关	开启	关闭
+netplugd	网线热插拔监视	关闭	关闭
+network	 	开启	开启
+nfs	网络文件系统	关闭	关闭
+nfslock	nfs相关	开启	关闭
+nscd	name cache，应该与DNS相关	关闭	关闭
+oddjobd	与D-BUS相关	关闭	关闭
+pand	蓝牙相关	关闭	关闭
+pcscd	pc/sc smart card daemon	开启	关闭
+portmap	使用NFS、NIS时的port map	开启	关闭
+psacct	负荷检测	关闭	关闭
+rawdevices	raw 设备支持	开启	开启
+rdisc	自动检测路由器	关闭	关闭
+readahead_early	 	开启	开启
+readahead_later	 	关闭	关闭
+restorecond	selinux相关	关闭	关闭
+rpcgssd	NFS相关	开启	关闭
 rpcidmapd	RPC name to UID/GID mapper	开启	关闭	NFS相关
-rpcsvcgssd	NFS相关	关闭	关闭	 
-saslauthd	sasl认证服务相关	关闭	关闭	 
-sendmail	 	开启	关闭	 
-smartd	硬盘自动检测守护进程	开启	开启	 
-sshd	 	开启	开启	 
-syslog	系统日志进程	开启	开启	 
-tcsd	 	关闭	关闭	 
-wpa_supplicant	无线认证相关	关闭	关闭	 
-xfs	x windows相关	开启	关闭	 
-ypbind	network information service客户端	关闭	关闭	 
+rpcsvcgssd	NFS相关	关闭	关闭
+saslauthd	sasl认证服务相关	关闭	关闭
+sendmail	 	开启	关闭
+smartd	硬盘自动检测守护进程	开启	开启
+sshd	 	开启	开启
+syslog	系统日志进程	开启	开启
+tcsd	 	关闭	关闭
+wpa_supplicant	无线认证相关	关闭	关闭
+xfs	x windows相关	开启	关闭
+ypbind	network information service客户端	关闭	关闭
 yum-updatesd	yum自动升级	开启	关闭	对服务器开启比较危险哦
 注：上述服务列表是在CentOS只安装了基本系统、开发工具、开发库、老软件支持的前提下显示出来的
 
 udev-post  实现即插即用功能 开启  开启
 
 
-./configure --prefix=/usr/local/services/net-snmp-5.7.2.1 --with-default-snmp-version="3" --with-logfile="/usr/local/services/net-snmp-5.7.2.1/log/snmpd.log" --with-persistent-directory="/usr/local/services/net-snmp-5.7.2.1/var/net-snmp" --enable-mfd-rewrites --enable-embedded-perl --with-perl-modules --with-sys-contact="chinatree.lu@gmail.com" --with-sys-location="China" 
+./configure --prefix=/usr/local/services/net-snmp-5.7.2.1 --with-default-snmp-version="3" --with-logfile="/usr/local/services/net-snmp-5.7.2.1/log/snmpd.log" --with-persistent-directory="/usr/local/services/net-snmp-5.7.2.1/var/net-snmp" --enable-mfd-rewrites --enable-embedded-perl --with-perl-modules --with-sys-contact="chinatree.lu@gmail.com" --with-sys-location="China"
 
 安装 Zabbix ：
 ./configure --prefix=/usr/local/services/zabbix-2.2.3 --enable-server --enable-agent --with-mysql=/usr/local/services/mysql/bin/mysql_config --with-net-snmp --with-libcurl

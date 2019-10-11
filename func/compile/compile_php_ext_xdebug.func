@@ -15,8 +15,8 @@ compile_php_ext_xdebug()
     cd "${module}"-"${version}"
     echo -n "Compile `get_color "${module}"-"${version}" CYANBLUE` for php extension ... "
     ${install_dir_prefix}/php/bin/phpize > "${logfile}" 2>&1
-    ./configure --prefix="${install_dir_prefix}"/"${module}"-"${version}" --enable-xdebug >> "${logfile}" 2>&1
-    make >> "${logfile}" 2>&1
+    ./configure --prefix="${install_dir_prefix}/${module}-${version}" --enable-xdebug >> "${logfile}" 2>&1
+    make -j `cat /proc/cpuinfo | grep "processor" | sort -u | wc -l` >> "${logfile}" 2>&1
     sudo make install >> "${logfile}" 2>&1
     get_exit_code $? 0
 

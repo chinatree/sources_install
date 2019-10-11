@@ -23,7 +23,7 @@ compile_beanstalkd()
     cd "${module}-${version}"
     echo -n "Compile `get_color "${module}-${version}" CYANBLUE` to `get_color "${install_dir_prefix}" UNDERLINE` ... "
     sed -i '/^PREFIX/c\PREFIX='"${install_dir_prefix}/${module}-${version}"'' Makefile
-    make >> "${logfile}" 2>&1
+    make -j `cat /proc/cpuinfo | grep "processor" | sort -u | wc -l` >> "${logfile}" 2>&1
     make install >> "${logfile}" 2>&1
     get_exit_code $? 0
 

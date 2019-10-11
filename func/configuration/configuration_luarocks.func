@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Configuration services of luarocks function
+configuration_luarocks()
+{
+    local module="luarocks"
+    local version="${luarocks_version}"
+
+    [ ! -h "${install_dir_prefix}/${module}" ] && cd "${install_dir_prefix}" && ln -sf "${module}-${version}" "${module}"
+
+    # Softlink
+    ln -sf "${install_dir_prefix}/${module}/bin/luarocks" "${path_local_bin}/luarocks"
+    # ln -sf "${install_dir_prefix}/${module}/bin/luarocks-admin" "${path_local_bin}/luarocks-admin"
+}

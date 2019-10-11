@@ -8,7 +8,7 @@ compile_mmseg()
 
     local module="mmseg"
     local version="${mmseg_version}"
-    local logfile=""${install_log_dir}"/"${module}".log"
+    local logfile="${install_log_dir}/${module}.log"
     cp -a "${packets_dir}"/coreseek-"${version}".tar.gz "${tmp_dir}"
     cd "${tmp_dir}"
 
@@ -16,8 +16,8 @@ compile_mmseg()
     cd coreseek-"${version}"/"${module}"-"${version}"
     echo -n "Compile `get_color "${module}"-"${version}" CYANBLUE` to `get_color "${install_dir_prefix}" UNDERLINE` ... "
     ./bootstrap > "${logfile}" 2>&1
-    ./configure --prefix="${install_dir_prefix}"/"${module}"-"${version}" >> "${logfile}" 2>&1
-    make >> "${logfile}" 2>&1
+    ./configure --prefix="${install_dir_prefix}/${module}-${version}" >> "${logfile}" 2>&1
+    make -j `cat /proc/cpuinfo | grep "processor" | sort -u | wc -l` >> "${logfile}" 2>&1
     make install >> "${logfile}" 2>&1
     get_exit_code $? 1
 

@@ -8,7 +8,7 @@ configuration_jdk()
     local account="root"
     local profile_file="/etc/profile"
 
-    [ ! -h "${install_dir_prefix}/${module}" ] && cd "${install_dir_prefix}" && ln -sf "${module}"-"${version}" "${module}"
+    [ ! -h "${install_dir_prefix}/${module}" ] && cd "${install_dir_prefix}" && ln -sf "${module}-${version}" "${module}"
     chown -R "${account}"."${account}" "${install_dir_prefix}/${module}-${version}"
 
     local added_flag=$(less "${profile_file}" | grep '# Set Java Environment Variable' | wc -l)

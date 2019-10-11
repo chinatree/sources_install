@@ -8,13 +8,13 @@ compile_httpd()
 
     local module="httpd"
     local version="${httpd_version}"
-    local logfile=""${install_log_dir}"/"${module}".log"
-    cp -a "${packets_dir}"/"${module}"-"${version}".tar.gz "${tmp_dir}"
+    local logfile="${install_log_dir}/${module}.log"
+    cp -a "${packets_dir}"/"${module}-${version}.tar.gz" "${tmp_dir}"
     cp -a "${libs_dir}"/apr-"${libs_apr_version}".tar.bz2 "${tmp_dir}"
     cp -a "${libs_dir}"/apr-util-"${libs_apr_util_version}".tar.bz2 "${tmp_dir}"
     cd "${tmp_dir}"
 
-    tar xf "${module}"-"${version}".tar.gz
+    tar xf "${module}-${version}.tar.gz"
     tar xf apr-"${libs_apr_version}".tar.bz2
     tar xf apr-util-"${libs_apr_util_version}".tar.bz2
     cd "${module}"-"${version}"
@@ -22,7 +22,7 @@ compile_httpd()
     cp -a ../apr-util-"${libs_apr_util_version}" ./srclib/apr-util
     echo -n "Compile `get_color "${module}"-"${version}" CYANBLUE` to `get_color "${install_dir_prefix}" UNDERLINE` ... "
     ./configure --prefix="${install_dir_prefix}/${module}-${version}" --with-included-apr --enable-nonportable-atomics=yes --enable-so --enable-ssl --enable-rewrite --enable-deflate --with-pcre="${install_libs_dir_prefix}/pcre-${libs_pcre_version}" > "${logfile}" 2>&1
-    make >> "${logfile}" 2>&1
+    make -j `cat /proc/cpuinfo | grep "processor" | sort -u | wc -l` >> "${logfile}" 2>&1
     make install >> "${logfile}" 2>&1
     get_exit_code $? 1
 

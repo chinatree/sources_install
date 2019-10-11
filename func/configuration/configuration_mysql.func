@@ -10,7 +10,7 @@ configuration_mysql()
     local user="${module}"
     local group="dba"
 
-    [ ! -h "${install_dir_prefix}/${module}" ] && cd "${install_dir_prefix}" && ln -sf "${module}"-"${version}" "${module}"
+    [ ! -h "${install_dir_prefix}/${module}" ] && cd "${install_dir_prefix}" && ln -sf "${module}-${version}" "${module}"
     ln -sf "${install_dir_prefix}"/"${module}"/bin/mysql "${path_local_bin}"/mysql
     ln -sf "${install_dir_prefix}"/"${module}"/bin/mysqldump "${path_local_bin}"/mysqldump
     ln -sf "${install_dir_prefix}"/"${module}"/bin/mysqlhotcopy "${path_local_bin}"/mysqlhotcopy
@@ -21,7 +21,7 @@ configuration_mysql()
     chk_not_exists_user "${user}"
     if [ $? -eq 1 ];
     then
-        groupadd -r "${group}" 
+        groupadd -r "${group}"
         useradd -r -s /sbin/nologin -g "${group}" "${user}"
     fi
     chown -R "${user}"."${group}" "${mysql_data_dir}"

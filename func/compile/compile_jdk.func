@@ -23,7 +23,8 @@ compile_jdk()
     echo -n "Compile `get_color "${module}"-"${version}" CYANBLUE` to `get_color "${install_dir_prefix}" UNDERLINE` ... "
     if [ ! -d "${install_dir_prefix}/${module}-${version}" ];
     then
-        mv "${module}"-"${version}" "${install_dir_prefix}"/"${module}"-"${version}"
+        mv "${module}"-"${version}" "${install_dir_prefix}/${module}-${version}"
+
         get_exit_code $? 1
     else
         echo "[ EXISTS ]"

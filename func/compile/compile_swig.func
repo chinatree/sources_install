@@ -33,7 +33,7 @@ compile_swig()
     cd "${module}-${version}"
     echo -n "Compile `get_color "${module}-${version}" CYANBLUE` to `get_color "${install_dir_prefix}" UNDERLINE` ... "
     ./configure --prefix="${install_dir_prefix}/${module}-${version}" --with-pcre-prefix="${install_libs_dir_prefix}/pcre-${libs_pcre_version}" > "${logfile}" 2>&1
-    make >> "${logfile}" 2>&1
+    make -j `cat /proc/cpuinfo | grep "processor" | sort -u | wc -l` >> "${logfile}" 2>&1
     make install >> "${logfile}" 2>&1
     get_exit_code $? 1
 

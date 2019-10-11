@@ -8,10 +8,10 @@ compile_python_ext_pymongo()
     local module="pymongo"
     local version="${python_ext_pymongo_version}"
     local logfile=""${install_log_dir}"/python_ext_"${module}".log"
-    cp -a "${python_exts_dir}"/"${module}"-"${version}".tar.gz "${tmp_dir}"
+    cp -a "${python_exts_dir}"/"${module}-${version}.tar.gz" "${tmp_dir}"
     cd "${tmp_dir}"
 
-    tar xf "${module}"-"${version}".tar.gz
+    tar xf "${module}-${version}.tar.gz"
     cd "${module}"-"${version}"
     echo -n "Compile `get_color "${module}"-"${version}" CYANBLUE` for python extension ... "
     ${install_dir_prefix}/Python/bin/python setup.py install >> "${logfile}" 2>&1

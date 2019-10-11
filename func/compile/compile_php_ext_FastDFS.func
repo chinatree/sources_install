@@ -19,7 +19,7 @@ compile_php_ext_FastDFS()
     sed -i 's#-L/usr/local/lib#-L'"${install_dir_prefix}/${module}"'/lib#g' Makefile
     sed -i 's#-I/usr/local/include/fastcommon#-I'"${install_dir_prefix}/${module}"'/include/fastcommon#' Makefile
     sed -i 's#-I/usr/local/include/fastdfs#-I'"${install_dir_prefix}/${module}"'/include/fastdfs#' Makefile
-    make >> "${logfile}" 2>&1
+    make -j `cat /proc/cpuinfo | grep "processor" | sort -u | wc -l` >> "${logfile}" 2>&1
     make install >> "${logfile}" 2>&1
     get_exit_code $? 0
 

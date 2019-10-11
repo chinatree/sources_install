@@ -23,7 +23,7 @@ compile_ImageMagick()
     cd "${module}"-"${version}"
     echo -n "Compile `get_color "${module}"-"${version}" CYANBLUE` to `get_color "${install_dir_prefix}" UNDERLINE` ... "
     ./configure CPPFLAGS="-I${install_libs_dir_prefix}/libpng-${libs_libpng_version}/include/ -I${install_libs_dir_prefix}/jpeg-${libs_jpeg_version}/include/" LDFLAGS="-L${install_libs_dir_prefix}/libpng-${libs_libpng_version}/lib/ -L${install_libs_dir_prefix}/jpeg-${libs_jpeg_version}/lib/" --prefix="${install_dir_prefix}/${module}-${version}" > "${logfile}" 2>&1
-    make >> "${logfile}" 2>&1
+    make -j `cat /proc/cpuinfo | grep "processor" | sort -u | wc -l` >> "${logfile}" 2>&1
     make install >> "${logfile}" 2>&1
     get_exit_code $? 1
 

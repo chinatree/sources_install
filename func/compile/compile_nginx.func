@@ -8,31 +8,31 @@ compile_nginx()
 
     local module="nginx"
     local version="${nginx_version}"
-    local logfile=""${install_log_dir}"/"${module}".log"
+    local logfile="${install_log_dir}/${module}.log"
+    local cpu_core_num="${CPU_CORE_NUM:-1}"
     if [ ! -f "${packets_dir}/${module}-${version}.tar.gz" ];
     then
         echo -n "The file `get_color "${packets_dir}/${module}-${version}.tar.gz" UNDERLINE` not exists ... "
         get_exit_code 1 0
         return
     fi
-    cp -a "${packets_dir}"/"${module}"-"${version}".tar.gz "${tmp_dir}"
-    cp -a "${libs_dir}"/pcre-"${libs_pcre_version}".tar.bz2 "${tmp_dir}"
+    cp -a "${packets_dir}/${module}-${version}.tar.gz" "${tmp_dir}"
+    cp -a "${packets_dir}/openssl-${openssl_version}.tar.gz" "${tmp_dir}"
+    cp -a "${libs_dir}/pcre-${libs_pcre_version}.tar.bz2" "${tmp_dir}"
     cd "${tmp_dir}"
 
-    tar xf "${module}"-"${version}".tar.gz
-    tar xf pcre-"${libs_pcre_version}".tar.bz2
+    tar xf "${module}-${version}.tar.gz"
+    tar xf "openssl-${openssl_version}.tar.gz"
+    tar xf "pcre-${libs_pcre_version}.tar.bz2"
     cd "${module}"-"${version}"
-    echo -n "Compile `get_color "${module}"-"${version}" CYANBLUE` to `get_color "${install_dir_prefix}" UNDERLINE` ... "
-    if [ "${version%.*}" == '1.12' ];
+    echo -n "Compile `get_color "${module}-${version}" CYANBLUE` to `get_color "${install_dir_prefix}" UNDERLINE` ... "
+    if [ "${version%.*}" == '1.16' ];
     then
-        ./configure --prefix="${install_dir_prefix}"/"${module}"-"${version}" --with-http_gzip_static_module --with-http_ssl_module --with-pcre="${tmp_dir}"/pcre-"${libs_pcre_version}" --with-http_realip_module --with-http_sub_module --with-http_stub_status_module --with-mail_ssl_module --with-threads --without-http_scgi_module > "${logfile}" 2>&1
-    elif [ "${version%.*}" == '1.14' ];
-    then
-        ./configure --prefix="${install_dir_prefix}"/"${module}"-"${version}" --with-http_gzip_static_module --with-http_ssl_module --with-pcre="${tmp_dir}"/pcre-"${libs_pcre_version}" --with-http_realip_module --with-http_sub_module --with-http_stub_status_module --with-mail_ssl_module --with-threads --with-file-aio --without-http_scgi_module > "${logfile}" 2>&1
+        ./configure --prefix="${install_dir_prefix}/${module}-${version}" --with-pcre="${tmp_dir}/pcre-${libs_pcre_version}" --with-pcre-jit --with-openssl="${tmp_dir}/openssl-${openssl_version}" --with-ipv6 --with-http_gzip_static_module --with-http_ssl_module --with-http_v2_module --with-http_realip_module --with-http_sub_module --with-http_stub_status_module --with-mail_ssl_module --with-threads --with-file-aio --without-http_scgi_module > "${logfile}" 2>&1
     else
-        ./configure --prefix="${install_dir_prefix}"/"${module}"-"${version}" --with-http_gzip_static_module --with-http_ssl_module --with-pcre="${tmp_dir}"/pcre-"${libs_pcre_version}" --with-http_realip_module --with-http_sub_module --with-http_stub_status_module --with-mail_ssl_module --with-threads --with-file-aio --without-http_scgi_module > "${logfile}" 2>&1
+        ./configure --prefix="${install_dir_prefix}/${module}-${version}" --with-pcre="${tmp_dir}"/pcre-"${libs_pcre_version}" --with-pcre-jit --with-openssl="${tmp_dir}/openssl-${openssl_version}" --with-ipv6 --with-http_gzip_static_module --with-http_ssl_module --with-http_v2_module --with-http_realip_module --with-http_sub_module --with-http_stub_status_module --with-mail_ssl_module --with-threads --with-file-aio --without-http_scgi_module -j "${cpu_core_num}" > "${logfile}" 2>&1
     fi
-    make >> "${logfile}" 2>&1
+    make -j "${cpu_core_num}" >> "${logfile}" 2>&1
     make install >> "${logfile}" 2>&1
     get_exit_code $? 1
 

@@ -7,19 +7,19 @@ compile_libs_openssl()
 
     local module="openssl"
     local version="${libs_openssl_version}"
-    local logfile=""${install_log_dir}"/"${module}".log"
-    cp -a "${libs_dir}"/"${module}"-"${version}".tar.gz "${tmp_dir}"
+    local logfile="${install_log_dir}/${module}.log"
+    cp -a "${libs_dir}"/"${module}-${version}.tar.gz" "${tmp_dir}"
     cd "${tmp_dir}"
 
-    tar xf "${module}"-"${version}".tar.gz
+    tar xf "${module}-${version}.tar.gz"
     cd "${module}"-"${version}"
     echo -n "Compile `get_color "${module}"-"${version}" CYANBLUE` to `get_color "${install_libs_dir_prefix}" UNDERLINE` ... "
     ./config --prefix="${install_libs_dir_prefix}/${module}"-"${version}" --openssldir="${install_libs_dir_prefix}"/"${module}"-"${version}"/ssl > "${logfile}" 2>&1
-    make >> "${logfile}" 2>&1
+    make -j `cat /proc/cpuinfo | grep "processor" | sort -u | wc -l` >> "${logfile}" 2>&1
     make install >> "${logfile}" 2>&1
     ./config shared --prefix="${install_libs_dir_prefix}"/"${module}"-"${version}" --openssldir="${install_libs_dir_prefix}/${module}-${version}/ssl" > "${logfile}" 2>&1
-    make clean >> "${logfile}" 2>&1 
-    make >> "${logfile}" 2>&1
+    make clean >> "${logfile}" 2>&1
+    make -j `cat /proc/cpuinfo | grep "processor" | sort -u | wc -l` >> "${logfile}" 2>&1
     make install >> "${logfile}" 2>&1
     get_exit_code $? 1
 

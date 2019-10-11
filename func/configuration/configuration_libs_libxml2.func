@@ -7,5 +7,5 @@ configuration_libs_libxml2()
     local module="libxml2"
     local version="${libs_libxml2_version}"
 
-    [ ! -h "${install_libs_dir_prefix}/${module}" ] && cd "${install_libs_dir_prefix}" && ln -sf "${module}"-"${version}" "${module}"
+    [ ! -h "${install_libs_dir_prefix}/${module}" ] && cd "${install_libs_dir_prefix}" && ln -sf "${module}-${version}" "${module}"
 }

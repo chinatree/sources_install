@@ -6,7 +6,7 @@ configuration_python()
     local module="Python"
     local version="${python_version}"
 
-    [ ! -h "${install_dir_prefix}/${module}" ] && cd "${install_dir_prefix}" && ln -sf "${module}"-"${version}" "${module}"
+    [ ! -h "${install_dir_prefix}/${module}" ] && cd "${install_dir_prefix}" && ln -sf "${module}-${version}" "${module}"
     ln -sf "${install_dir_prefix}"/"${module}"/bin/python "${path_local_bin}"/python
     ln -sf "${install_dir_prefix}"/"${module}"/bin/pydoc "${path_local_bin}"/pydoc
 }

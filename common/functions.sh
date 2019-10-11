@@ -109,7 +109,7 @@ parse_arguments_while() {
         case "${1:-NONE}" in
             -h|--help)
                 usage
-                ;;      
+                ;;
             -D|--debug)
                 set -x
                 ;;

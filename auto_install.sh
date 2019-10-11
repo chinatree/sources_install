@@ -40,7 +40,7 @@ load_file "${COMMON_DIR}/functions.sh"
 load_file "${COMMON_DIR}/global.sh"
 load_file "${COMPILE_FUNC_SH}"
 
-trap "get_color \"Received CTRL + C, then stopped!\n\" RED; clean_tmp; exit 2" INT QUIT
+# trap "get_color \"Received CTRL + C, then stopped!\n\" RED; clean_tmp; exit 2" INT QUIT
 
 #------------------------------------------------ Other Functions ------------------------------------------------#
 usage() {
@@ -101,7 +101,7 @@ parse_arguments_while() {
                 ;;
             -h|--help)
                 usage
-                ;;      
+                ;;
             -D|--debug)
                 set -x
                 ;;
@@ -158,7 +158,7 @@ versions() {
     version_format "gearman" "${php_ext_gearman_version}"
     version_format "uuid" "${php_ext_uuid_version}"
     version_format "imagick" "${php_ext_imagick_version}"
-    version_format "scws" "${php_ext_scws_version}"    
+    version_format "scws" "${php_ext_scws_version}"
     version_format "xdebug" "${php_ext_xdebug_version}"
     version_format "taint" "${php_ext_taint_version}"
     version_format "yaf" "${php_ext_yaf_version}"
@@ -362,7 +362,7 @@ install_base_packet() {
                 echo 'pass'
             fi
         done
-        
+
         echo `get_color 'Failed to detect the default system, please confirm whether you have installed the following basic package and depend on the package:' PEACH`
         echo '  vim ntp gcc gcc-c++ make automake autoconf rsync wget man lsof'
         echo '  openssl openssl-devel telnet traceroute bind-utils openssh-clients'
@@ -576,15 +576,21 @@ switch_do_type() {
         interact_choice "install ansible extension for python?" compile_python_ext_ansible
         return 0
         ;;
+    interact_web_platform)
+        interact_choice "install nginx?" 'compile_nginx auto_config'
+        interact_choice "install openresty?" 'compile_openresty auto_config'
+        interact_choice "install luarocks?" 'compile_luarocks auto_config'
+        interact_choice "install kong?" 'compile_kong auto_config'
+        return 0
+        ;;
     interact_other)
-        interact_choice "install nginx with modules(fastdfs)?" 'compile_nginx_with_modules auto_config'
         interact_choice "install tengine?" 'compile_tengine auto_config'
         interact_choice "install python?" 'compile_python auto_config'
         interact_choice "install nodejs?" 'compile_node auto_config'
         interact_choice "install java(jdk)?" 'compile_jdk auto_config'
         interact_choice "install uuid?" 'compile_uuid auto_config'
         #interact_choice "install lua?" 'compile_lua auto_config'
-        interact_choice "install gearmand?" compile_gearmand
+        interact_choice "install gearmand?" 'compile_gearmand'
         interact_choice "install ImageMagick for imagick(php_ext)?" 'compile_ImageMagick auto_config'
         interact_choice "install scws for scws(php_ext)?" 'compile_scws auto_config'
         interact_choice "install mmseg for coreseek?" 'compile_mmseg auto_config'
@@ -665,14 +671,14 @@ switch_do_type() {
         #compile_FastDFS "auto_config"
         #compile_FastDHT "auto" "auto_config"
         #compile_tools_nethogs "auto_config"
-         
+
         ## For beta
         #compile_libs_cairo
         #compile_rrdtool
         #compile_nagios
         #compile_varnish
         #compile_apache_tomcat "auto_config"
-        
+
         compile_libs_openssl
         #compile_python_ext_ipython
 
@@ -684,7 +690,7 @@ switch_do_type() {
         return 0
         ;;
     feature)
-        
+
         return 0
         ;;
     custom)
@@ -697,7 +703,7 @@ switch_do_type() {
         fi
         ;;
     esac
-    return 1    
+    return 1
 }
 #------------------------------------------------ Global Functions ------------------------------------------------#
 

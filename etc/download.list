@@ -1,12 +1,14 @@
 #[taxonomy]|module|download url|version|save relative paths
-#[Servers]|nginx|http://nginx.org/download/nginx-1.14.0.tar.gz|1.14.0|packets
+# [Servers]|nginx|http://nginx.org/download/nginx-1.16.1.tar.gz|1.16.1|packets
+# [Servers]|openresty|https://openresty.org/download/openresty-1.15.8.2.tar.gz|1.15.8.2|packets
+# [Servers]|kong|https://github.com/Kong/kong/archive/2.0.2.tar.gz|2.0.2|packets
 #[Servers]|mysql|https://dev.mysql.com/get/Downloads/MySQL-5.6/mysql-5.6.44.tar.gz|5.6.44|packets
 #[Servers]|mariadb|http://mirrors.ustc.edu.cn/mariadb/mariadb-5.5.41/source/mariadb-5.5.41.tar.gz|5.5.41|packets
 #[Servers]|php|http://cn2.php.net/distributions/php-7.1.3.tar.gz|7.1.3|packets
 #[Servers]|memcached|http://www.memcached.org/files/memcached-1.4.24.tar.gz|1.4.24|packets
 #[Servers]|node|https://nodejs.org/dist/v6.10.0/node-v6.10.0.tar.gz|v6.10.0|packets
 #[Servers]|ImageMagick|http://www.imagemagick.org/download/ImageMagick-6.9.0-0.tar.bz2|6.9.0-0|packets
-#[Servers]|redis|http://download.redis.io/releases/redis-5.0.3.tar.gz|v5.0.3|packets
+#[Servers]|redis|http://download.redis.io/releases/redis-5.0.8.tar.gz|5.0.8|packets
 #[Servers]|mongodb|http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-2.6.1.tgz|linux-x86_64-2.6.1|packets
 #[Servers]|uuid|ftp://ftp.ossp.org/pkg/lib/uuid/uuid-1.6.2.tar.gz|1.6.2|packets
 #[Servers]|scws|http://www.xunsearch.com/scws/down/scws-1.2.2.tar.bz2|1.2.2|packets
@@ -19,8 +21,9 @@
 #[Servers]|rabbitmq-server|http://www.rabbitmq.com/releases/rabbitmq-server/v3.3.4/rabbitmq-server-3.3.4.tar.gz|3.3.4|packets
 #[Servers]|varnish|https://repo.varnish-cache.org/source/varnish-4.0.1.tar.gz|4.0.1|packets
 #[Servers]|hadoop|http://mirror.bit.edu.cn/apache/hadoop/common/hadoop-2.4.1/hadoop-2.4.1.tar.gz|2.4.1|packets
-#[Servers]|Python|https://www.python.org/ftp/python/2.7.9/Python-2.7.9.tgz|2.7.9|packets
+#[Servers]|Python|https://www.python.org/ftp/python/3.6.10/Python-3.6.10.tgz|3.6.10|packets
 #[Servers]|beanstalkd|https://github.com/kr/beanstalkd/archive/v1.10.tar.gz|1.10|packets
+# [Servers]|openssl|https://www.openssl.org/source/openssl-1.1.1f.tar.gz|1.1.1f|packets
 #
 # Libraries
 #[Libraries]|apr|http://mirrors.hust.edu.cn/apache/apr/apr-1.5.1.tar.bz2|1.5.1|packets/libs
@@ -34,7 +37,7 @@
 #[Libraries]|libiconv|http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.14.tar.gz|1.14|packets/libs
 #[Libraries]|libpng|http://jaist.dl.sourceforge.net/project/libpng/libpng16/1.6.10/libpng-1.6.10.tar.gz|1.6.10|packets/libs
 #[Libraries]|libxml2|ftp://xmlsoft.org/libxml2/libxml2-2.9.1.tar.gz|2.9.1|packets/libs
-#[Libraries]|pcre|https://ftp.pcre.org/pub/pcre/pcre-8.40.tar.bz2|8.40|packets/libs
+# [Libraries]|pcre|https://ftp.pcre.org/pub/pcre/pcre-8.44.tar.bz2|8.44|packets/libs
 #[Libraries]|libpcap|http://www.tcpdump.org/release/libpcap-1.6.2.tar.gz|1.6.2|packets/tools
 #[Libraries]|libsodium|https://github.com/jedisct1/libsodium/releases/download/1.0.3/libsodium-1.0.3.tar.gz|1.0.3|packets/tools
 #[Libraries]|libffi|https://github.com/atgreen/libffi/archive/v3.2.1.tar.gz|3.2.1|packets/tools

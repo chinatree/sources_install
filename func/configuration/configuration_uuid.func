@@ -8,6 +8,6 @@ configuration_uuid()
 
     if [ ! -d "${install_dir_prefix}/${module}"-"${version}" ];
     then
-        [ ! -h "${install_dir_prefix}/${module}" ] && cd "${install_dir_prefix}" && ln -sf "${module}"-"${version}" "${module}"
+        [ ! -h "${install_dir_prefix}/${module}" ] && cd "${install_dir_prefix}" && ln -sf "${module}-${version}" "${module}"
     fi
 }

@@ -29,11 +29,12 @@ compile_mariadb()
     then
         cmake -DCMAKE_INSTALL_PREFIX="${install_dir_prefix}/${module}-${version}" -DSYSCONFDIR="${install_dir_prefix}/${module}-${version}/etc" -DDEFAULT_CHARSET=utf8 -DDEFAULT_COLLATION=utf8_general_ci -DEXTRA_CHARSETS=all -DWITH_DEBUG=0 -DENABLED_LOCAL_INFILE=1 -DWITH_INNOBASE_STORAGE_ENGINE=1 -DWITH_PARTITION_STORAGE_ENGINE=1 > "${logfile}" 2>&1
     fi
-    make >> "${logfile}" 2>&1
+    make -j `cat /proc/cpuinfo | grep "processor" | sort -u | wc -l` >> "${logfile}" 2>&1
     make install >> "${logfile}" 2>&1
     get_exit_code $? 1
 
-    cp -a support-files/mysql.server "${install_dir_prefix}"/"${module}"-"${version}"
+    cp -a support-files/mysql.server "${install_dir_prefix}/${module}-${version}"
+
 
     # configuration
     if [ "${config_action}" = "auto_config" ];

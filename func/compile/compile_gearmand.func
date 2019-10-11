@@ -7,15 +7,15 @@ compile_gearmand()
 
     local module="gearmand"
     local version="${gearmand_version}"
-    local logfile=""${install_log_dir}"/"${module}".log"
-    cp -a "${packets_dir}"/"${module}"-"${version}".tar.gz "${tmp_dir}"
+    local logfile="${install_log_dir}/${module}.log"
+    cp -a "${packets_dir}"/"${module}-${version}.tar.gz" "${tmp_dir}"
     cd "${tmp_dir}"
 
-    tar xf "${module}"-"${version}".tar.gz
+    tar xf "${module}-${version}.tar.gz"
     cd "${module}"-"${version}"
     echo -n "Compile `get_color "${module}"-"${version}" CYANBLUE` to `get_color "${install_dir_prefix}" UNDERLINE` ... "
     ./configure --prefix="${install_dir_prefix}/${module}-${version}" CPPFLAGS="-I/usr/local/services/libs/libmemcached-1.0.15/include/ -I/usr/local/services/libs/libevent-2.0.21-stable/include/" LDFLAGS="-L/usr/local/services/libs/libmemcached-1.0.15/lib/ -L/usr/local/services/libs/libevent-2.0.21-stable/lib/" --with-memcached="${install_dir_prefix}/memcached-${memcached_version}/bin/memcached" > "${logfile}" 2>&1
-    make >> "${logfile}" 2>&1
+    make -j `cat /proc/cpuinfo | grep "processor" | sort -u | wc -l` >> "${logfile}" 2>&1
     make install >> "${logfile}" 2>&1
     get_exit_code $? 1
 
